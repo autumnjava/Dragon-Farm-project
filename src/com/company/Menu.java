@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner scanner = new Scanner(System.in);
-    static int input;
+    static int usersInput, roundsInput;
 
     private boolean isRunning = true;
     // default names of players
@@ -26,19 +26,19 @@ public class Menu {
     }
 
     public static int howManyUsers(){
-        input = 0;
+        usersInput = 0;
         String error = "ONLY DIGITS [1-4]! Try again";
             print("\n\nEnter how many users are going to play this game [1-4]");
             try {
                 var userInput = scanner.nextLine();
-                input = Integer.parseInt(userInput);
-                if (input < 1 || input > 4) {
+                usersInput = Integer.parseInt(userInput);
+                if (usersInput < 1 || usersInput > 4) {
                     System.out.println(error);
                     howManyUsers();
                 } else {
-                    print("You have entered " + input);
+                    print("You have entered " + usersInput);
 
-                    for(var i = 0; i < input; i++){
+                    for(var i = 0; i < usersInput; i++){
                         names[i] = Menu.prompt("Player " + (i + 1) + " name"
                                 + " (space + enter for \"" + names[i] + "\"):", names[i]);
                     }
@@ -48,26 +48,28 @@ public class Menu {
                 print(error);
                 howManyUsers();
             }
-        return input;
+        return usersInput;
     }
 
-    private void howManyRounds() {
+    private static int howManyRounds() {
         String error = "ONLY DIGITS [5-30]! Try again";
+
         try {
-                print("Enter how many rounds you want to play! [5-30]");
+                print("Enter how many rounds you want to play! [5-30].");
                 var userInput = scanner.nextLine();
-                int input = Integer.parseInt(userInput);
-                if (input < 5 || input > 30) {
+                roundsInput = Integer.parseInt(userInput);
+                if (roundsInput < 5 || roundsInput > 30) {
                     System.out.println(error);
                     howManyRounds();
                 } else {
-                    print("You have entered " + input);
+                    print("You have entered " + roundsInput);
                 }
 
             } catch (Exception e) {
                 System.out.println(error);
                 howManyRounds();
             }
+        return roundsInput;
 
     }
 

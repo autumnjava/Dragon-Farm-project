@@ -14,8 +14,7 @@ public class Menu {
     public Menu(String ...newNames){
         // start the game
         names = newNames.length < 4 ? names : newNames;
-        print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
-        print("created by Aleksandr S.\n2020 Malmö.\n" + "-".repeat(30));
+
 
         while(isRunning){
             howManyUsers();

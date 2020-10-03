@@ -15,7 +15,8 @@ public class Game {
 
 
     public Game(String ...newNames) {
-
+        Menu.print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
+        Menu.print("created by Aleksandr S.\n2020 Malmö.\n" + "-".repeat(30));
         new Menu();
 
     }

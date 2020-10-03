@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
     static Scanner scanner = new Scanner(System.in);
+    static int input;
 
     private boolean isRunning = true;
     // default names of players
@@ -11,46 +12,32 @@ public class Menu {
 
 
 
-    public Menu(String ...newNames){
+    public Menu(String ...newNames) {
         // start the game
         names = newNames.length < 4 ? names : newNames;
 
 
-        while(isRunning){
+        while (isRunning) {
             howManyUsers();
-            System.out.println("Test:");
-            System.out.println(names[0]);
-            System.out.println(names[1]);
-            System.out.println(names[2]);
-            System.out.println(names[3]);
-
             howManyRounds();
+            isRunning= false;
         }
-
-        main(); //restart the game
 
     }
 
-
-    private void main() {
-        if(Menu.prompt("Play again? (y/n)?").equals("n")){
-            System.exit(0);
-        }
-        // create a new game
-        new Game(names);
-    }
-
-    private void howManyUsers(){
+    public static int howManyUsers(){
+        input = 0;
         String error = "ONLY DIGITS [1-4]! Try again";
             print("\n\nEnter how many users are going to play this game [1-4]");
             try {
                 var userInput = scanner.nextLine();
-                int input = Integer.parseInt(userInput);
+                input = Integer.parseInt(userInput);
                 if (input < 1 || input > 4) {
                     System.out.println(error);
                     howManyUsers();
                 } else {
                     print("You have entered " + input);
+
                     for(var i = 0; i < input; i++){
                         names[i] = Menu.prompt("Player " + (i + 1) + " name"
                                 + " (space + enter for \"" + names[i] + "\"):", names[i]);
@@ -61,8 +48,7 @@ public class Menu {
                 print(error);
                 howManyUsers();
             }
-
-
+        return input;
     }
 
     private void howManyRounds() {
@@ -84,9 +70,6 @@ public class Menu {
             }
 
     }
-
-
-
 
     static public void print(String x){
         // print a string if it is not empty
@@ -111,6 +94,11 @@ public class Menu {
             return names[3];
         else
             return null;
+    }
+
+
+    public static String[] getNames(){
+        return names;
     }
 
 

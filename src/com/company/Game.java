@@ -15,6 +15,12 @@ public class Game {
     private String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"}; // default names of players
 
 
+    public Game(String ...newNames){
+
+
+
+
+    }
 
 
 

@@ -19,8 +19,9 @@ public class Game {
         int test = 0;
 
         System.out.println("See if we get here?");
+        var names = Menu.getNames();
         for(int i = 0; i < Menu.input; i++){
-            System.out.println(Arrays.toString(Menu.getNames()));
+            System.out.println(names[i]);
         }
 
         main(); //restart the game

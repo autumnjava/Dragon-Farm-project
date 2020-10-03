@@ -18,8 +18,8 @@ public class Game {
     public Game(String ...newNames){
         // start the game
         names = newNames.length < 4 ? names: newNames;
-        Menu.print ("\n".repeat(30) + "Welcome to Dragon Farm" + "-".repeat(20));
-        Menu.print("created by Aleksandr S. 2020");
+        Menu.print ("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
+        Menu.print("created by Aleksandr S.\n2020 Malmö.");
 
 
 

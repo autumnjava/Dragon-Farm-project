@@ -10,11 +10,10 @@ public class Main {
 
         //testing to create new Dragons
         Dragon[] temp = {
-                new Falkor("Fido", "male"),
-                new Falkor("Fido234", "male"),
-                new Falkor("Fido234", "male")
+                new Falkor("Falkorito", "male"),
+                new Falkor("Ok", "male")
         };
-        ArrayList<Dragon> dragons = new ArrayList(Arrays.asList(temp));
+        ArrayList dragons = new ArrayList(Arrays.asList(temp));
 
         System.out.println("Asking dragons to fly");
 

@@ -38,12 +38,13 @@ public class Game {
         int roundsCounter = 1;
         do{
             for(var player: players){
-                print("\n".repeat(5) + "-".repeat(30));
+                print("\n".repeat(20) + "-".repeat(50));
                 print( "Current round number: " + roundsCounter);
-                print("Right now playing: " + player.getName() +
+                print("Right now playing: " + player.getName().toUpperCase() +
                         ". Your balance is: " + player.getMoneyBalance());
-                print("");
-                print("-".repeat(30));
+                System.out.print(dragonsOwned.size() > 0 ? "Dragons owned : " + dragonsOwned + "\n" : "");
+                System.out.print(foodOwned.size() > 0 ? "Food owned : " + foodOwned + "\n" : "");
+                print("-".repeat(50));
                 menuChoice();
             }
             roundsCounter++;
@@ -124,7 +125,7 @@ public class Game {
             case "d" -> print("You decided to pair dragons");
             case "e" -> print("You decided to sell dragons");
             default -> {
-                print("Wrong input! Try again!"); //start the method again
+                print("Wrong input! Try again!\n"); //start the method again
                 menuChoice();
             }
         }

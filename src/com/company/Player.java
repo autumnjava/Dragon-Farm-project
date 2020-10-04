@@ -20,4 +20,8 @@ public class Player {
     public int getMoneyBalance() {
         return moneyBalance;
     }
+
+    public void setMoneyBalance(int moneyBalance) {
+        this.moneyBalance = moneyBalance;
+    }
 }

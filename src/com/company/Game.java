@@ -7,6 +7,8 @@ public class Game {
     static Scanner scanner = new Scanner(System.in);
     private FactoryStore factoryStore = new FactoryStore();
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Dragon> dragonsOwned = new ArrayList<>();
+    private ArrayList<Food> foodOwned = new ArrayList<>();
     private boolean isRunning = true;
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
     private static int usersInput, roundsInput;
@@ -36,9 +38,12 @@ public class Game {
         int roundsCounter = 1;
         do{
             for(var player: players){
-                System.out.println("\n".repeat(5) + "Current round number: " + roundsCounter);
+                print("\n".repeat(5) + "-".repeat(30));
+                print( "Current round number: " + roundsCounter);
                 print("Right now playing: " + player.getName() +
                         ". Your balance is: " + player.getMoneyBalance());
+                print("");
+                print("-".repeat(30));
                 menuChoice();
             }
             roundsCounter++;
@@ -51,14 +56,6 @@ public class Game {
         }
         // create a new game
         new Game();
-    }
-
-    public void createPlayers(){
-        System.out.println("Creating player(s)");
-        for(int i = 0; i < usersInput; i++){
-            System.out.println(names[i]);
-            players.add(new Player(names[i]));
-        }
     }
 
     public void howManyUsers(){
@@ -101,6 +98,14 @@ public class Game {
         } catch (Exception e) {
             System.out.println(error);
             howManyRounds();
+        }
+    }
+
+    public void createPlayers(){
+        System.out.println("Creating player(s)");
+        for(int i = 0; i < usersInput; i++){
+            System.out.println(names[i]);
+            players.add(new Player(names[i]));
         }
     }
 

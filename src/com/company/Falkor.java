@@ -8,7 +8,7 @@ public class Falkor extends Dragon {
     }
 
     public void fly(){
-        System.out.println("Falkor flies! You better fly high because you cost " + price + " kr.");
+        System.out.println("Falkor " + this.name + " flies! You better fly high because you cost " + price + " kr.");
     }
 
 

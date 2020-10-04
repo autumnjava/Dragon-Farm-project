@@ -10,10 +10,10 @@ public abstract class Dragon {
 
     private String name;
     private String gender;
-    private int price;
     private int healthPercent = 100;
+    private int price;
 
-    public Dragon(String name, String gender){
+    public Dragon(String name, String gender) {
         this.name = name;
         this.gender = gender;
     }

@@ -16,17 +16,14 @@ public class Menu {
         // start the game
         names = newNames.length < 4 ? names : newNames;
 
-
         while (isRunning) {
             howManyUsers();
             howManyRounds();
-            isRunning= false;
         }
 
     }
 
     public static int howManyUsers(){
-        usersInput = 0;
         String error = "ONLY DIGITS [1-4]! Try again";
             print("\n\nEnter how many users are going to play this game [1-4]");
             try {
@@ -53,7 +50,6 @@ public class Menu {
 
     private static int howManyRounds() {
         String error = "ONLY DIGITS [5-30]! Try again";
-
         try {
                 print("Enter how many rounds you want to play! [5-30].");
                 var userInput = scanner.nextLine();
@@ -70,8 +66,27 @@ public class Menu {
                 howManyRounds();
             }
         return roundsInput;
-
     }
+
+    public void menuChoice(){
+        System.out.println("You will now get 5 menu choices:");
+        System.out.println("a. Buy dragons" +
+                "\nb. Buy food" +
+                "\nc. Feed dragons" +
+                "\nd. Pair dragons (50-50 chance to succeed)" +
+                "\ne. Sell dragons");
+        var input = scanner.nextLine();
+        switch(input){
+            case "a" -> print("You decided to buy dragons!");
+            case "b" -> print("You decided to buy food");
+            case "c" -> print("You decided to feed your dragons");
+            case "d" -> print("You decided to pair dragons");
+            case "e" -> print("You decided to sell dragons");
+            default -> print("Wrong input!");
+        }
+    }
+
+
 
     static public void print(String x){
         // print a string if it is not empty

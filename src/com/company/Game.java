@@ -93,7 +93,7 @@ public class Game {
                 print("Current round number: " + roundsCounter);
                 print("Right now playing: " + player.getName().toUpperCase() +
                         ". Your balance is: " + player.getMoneyBalance());
-                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned() + "\n" : "");
+                player.getAllDragonsNames();
                 System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
                 print("-".repeat(50));
 
@@ -107,8 +107,8 @@ public class Game {
                 switch (input) {
                     case "a" -> {
                         print("You decided to buy dragons!");
-                        var falkor = new Falkor("Falkorito", "male");
-                        player.addDragon(falkor);
+
+                        player.addDragon();
 
                     }
                     case "b" -> print("You decided to buy food");

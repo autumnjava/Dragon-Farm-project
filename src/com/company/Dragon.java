@@ -25,4 +25,8 @@ public abstract class Dragon {
     }
 
     public abstract void fly();
+
+    public String presentYourself(){
+        return name;
+    }
 }

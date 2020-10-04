@@ -36,8 +36,15 @@ public class Player {
         return foodOwned;
     }
 
-    public void addDragon(Dragon dragon){
-        dragonsOwned.add(dragon);
+    public void addDragon(){
+        var falkor = new Falkor("Falkorito", "male");
+        this.dragonsOwned.add(falkor);
 
+    }
+
+    public void getAllDragonsNames(){
+        for(var dragon: dragonsOwned){
+            System.out.println(dragon.presentYourself());
+        }
     }
 }

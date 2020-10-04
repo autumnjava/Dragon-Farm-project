@@ -14,15 +14,12 @@ public class Game {
         Menu.print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
         Menu.print("created by Aleksandr S.\n2020 Malmö.\n" + "-".repeat(30));
         new Menu();
+        createPlayers();
 
-        System.out.println("Creating players");
-        var names = Menu.getNames();
-        for(int i = 0; i < Menu.usersInput; i++){
-            System.out.println(names[i]);
-            players.add(new Player(names[i]));
-        }
-        System.out.println("Test");
-        System.out.println(players);
+
+        System.out.println("Testing:");
+        System.out.println(players.size());
+        System.out.println(players.get(0).getName());
 
         main(); //restart the game
 
@@ -35,6 +32,15 @@ public class Game {
         }
         // create a new game
         new Game();
+    }
+
+    public void createPlayers(){
+        System.out.println("Creating players");
+        var names = Menu.getNames();
+        for(int i = 0; i < Menu.usersInput; i++){
+            System.out.println(names[i]);
+            players.add(new Player(names[i]));
+        }
     }
 
     }

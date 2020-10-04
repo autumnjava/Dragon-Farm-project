@@ -8,17 +8,12 @@ public abstract class Dragon {
     static String[] acceptedFood = {"Meat, Fish", "Meat, Grass", "Grass, Metal",
             "Fish", "Metal"};
 
-    private String name;
+    public String name;
     private String gender;
     private int healthPercent = 100;
     private int price;
 
-    public Dragon(String name, String gender) {
-        this.name = name;
-        this.gender = gender;
-    }
-
-    public Dragon create(String name, String gender) {
+    public Dragon (String name, String gender) {
         var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
 
         if (!gender.equals("male") && !gender.equals("female")) {
@@ -27,6 +22,5 @@ public abstract class Dragon {
         this.name = name;
         this.gender = gender;
         this.price = prices[classIndex];
-        return this;
     }
 }

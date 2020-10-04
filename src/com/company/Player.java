@@ -9,5 +9,8 @@ public class Player {
     private ArrayList<Dragon> dragonsOwned = new ArrayList<>();
     private Game game;
 
+    public Player(String name){
+        this.name = name;
+    }
 
 }

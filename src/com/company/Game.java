@@ -27,17 +27,10 @@ public class Game {
 
         createPlayers(); //creating players ArrayList
 
-        main();
-
-    }
-
-
-    private void main() {
         menuChoice();
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
-
 
     }
 
@@ -100,7 +93,7 @@ public class Game {
                 print("Current round number: " + roundsCounter);
                 print("Right now playing: " + player.getName().toUpperCase() +
                         ". Your balance is: " + player.getMoneyBalance());
-                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned().toString() + "\n" : "");
+                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned() + "\n" : "");
                 System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
                 print("-".repeat(50));
 
@@ -126,7 +119,6 @@ public class Game {
                         print("Wrong input! Try again!\n"); //start the method again
                         menuChoice();
                     }
-
                 }
             }
             roundsCounter++;

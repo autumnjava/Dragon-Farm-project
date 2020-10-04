@@ -38,5 +38,6 @@ public class Player {
 
     public void addDragon(Dragon dragon){
         dragonsOwned.add(dragon);
+
     }
 }

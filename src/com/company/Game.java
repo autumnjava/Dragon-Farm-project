@@ -7,8 +7,6 @@ public class Game {
     static Scanner scanner = new Scanner(System.in);
     private FactoryStore factoryStore = new FactoryStore();
     private ArrayList<Player> players = new ArrayList<>();
-    private ArrayList<Dragon> dragonsOwned = new ArrayList<>();
-    private ArrayList<Food> foodOwned = new ArrayList<>();
     private boolean isRunning = true;
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
     private static int usersInput, roundsInput;
@@ -42,8 +40,8 @@ public class Game {
                 print( "Current round number: " + roundsCounter);
                 print("Right now playing: " + player.getName().toUpperCase() +
                         ". Your balance is: " + player.getMoneyBalance());
-                System.out.print(dragonsOwned.size() > 0 ? "Dragons owned : " + dragonsOwned + "\n" : "");
-                System.out.print(foodOwned.size() > 0 ? "Food owned : " + foodOwned + "\n" : "");
+                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned() + "\n" : "");
+                System.out.print(player.getDragonsOwned().size() > 0 ? "Food owned : " + player.getDragonsOwned() + "\n" : "");
                 print("-".repeat(50));
                 menuChoice();
             }

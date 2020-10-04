@@ -19,6 +19,7 @@ public class Menu {
         while (isRunning) {
             howManyUsers();
             howManyRounds();
+            isRunning = false;
         }
 
     }
@@ -68,7 +69,7 @@ public class Menu {
         return roundsInput;
     }
 
-    public void menuChoice(){
+    public static void menuChoice(){
         System.out.println("You will now get 5 menu choices:");
         System.out.println("a. Buy dragons" +
                 "\nb. Buy food" +
@@ -76,13 +77,16 @@ public class Menu {
                 "\nd. Pair dragons (50-50 chance to succeed)" +
                 "\ne. Sell dragons");
         var input = scanner.nextLine();
-        switch(input){
+        switch (input) {
             case "a" -> print("You decided to buy dragons!");
             case "b" -> print("You decided to buy food");
             case "c" -> print("You decided to feed your dragons");
             case "d" -> print("You decided to pair dragons");
             case "e" -> print("You decided to sell dragons");
-            default -> print("Wrong input!");
+            default -> {
+                print("Wrong input!"); //start the method again
+                menuChoice();
+            }
         }
     }
 

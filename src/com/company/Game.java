@@ -24,29 +24,27 @@ public class Game {
         System.out.println(roundsInput + " roundsInput static int ");
         System.out.println(usersInput + " usersInput static int");
 
+        createPlayers(); //creating players ArrayList
 
-        //createPlayers();
-        while(isRunning){
-            System.out.println("\n\n\n\nNow testing all players");
-            for(var player: players){
-                print("\n".repeat(5) + "Right now playing: " + player.getName() +
-                        ". Your balance is: " + player.getMoneyBalance());
-                menuChoice();
-            }
-
-            isRunning = false;
-
-        }
-
-
-        main(); //restart the game
+        main();
 
     }
 
 
     private void main() {
+        int roundsCounter = 0;
+        do{
+            for(var player: players){
+                System.out.println("Now playing round number: " + roundsCounter+1);
+                print("\n".repeat(5) + "Right now playing: " + player.getName() +
+                        ". Your balance is: " + player.getMoneyBalance());
+                menuChoice();
+            }
+            roundsCounter++;
+        } while(roundsCounter < roundsInput);
 
 
+        System.out.println("We have now played " + roundsCounter + " rounds. Which was maximum for this game.");
 
         if(prompt("Play again? (y/n)?").equals("n")){
             System.exit(0);

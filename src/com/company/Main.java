@@ -11,9 +11,9 @@ public class Main {
         //testing to create new Dragons
         Dragon[] temp = {
                 new Falkor("Falkorito", "male"),
-                new Falkor("Ok", "male")
+                new Viserion("Ok", "female")
         };
-        ArrayList dragons = new ArrayList(Arrays.asList(temp));
+        var dragons = new ArrayList(Arrays.asList(temp));
 
         System.out.println("Asking dragons to fly");
 
@@ -21,7 +21,7 @@ public class Main {
             var className = dragon.getClass().getSimpleName();
             switch(className){
                 case "Falkor" -> ((Falkor) dragon).fly();
-                //case "Cat" -> ((Cat) animal).meow();
+                case "Viserion" -> ((Viserion) dragon).fly();
             }
         }
 

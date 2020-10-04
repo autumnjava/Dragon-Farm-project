@@ -14,13 +14,15 @@ public class Game {
         Menu.print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
         Menu.print("created by Aleksandr S.\n2020 Malmö.\n" + "-".repeat(30));
         new Menu();
-        int test = 0;
 
-        System.out.println("See if we get here?");
+        System.out.println("Creating players");
         var names = Menu.getNames();
         for(int i = 0; i < Menu.usersInput; i++){
             System.out.println(names[i]);
+            players.add(new Player(names[i]));
         }
+        System.out.println("Test");
+        System.out.println(players);
 
         main(); //restart the game
 

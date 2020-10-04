@@ -6,7 +6,7 @@ public class Viserion extends Dragon {
     }
 
     public void fly(){
-        System.out.println("Viserion flies!");
+        System.out.println("Lockheed flies!");
     }
 
 }

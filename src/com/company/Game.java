@@ -41,7 +41,7 @@ public class Game {
                 print("Right now playing: " + player.getName().toUpperCase() +
                         ". Your balance is: " + player.getMoneyBalance());
                 System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned() + "\n" : "");
-                System.out.print(player.getDragonsOwned().size() > 0 ? "Food owned : " + player.getDragonsOwned() + "\n" : "");
+                System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
                 print("-".repeat(50));
                 menuChoice();
             }
@@ -115,7 +115,12 @@ public class Game {
                 "\ne. Sell dragons");
         var input = scanner.nextLine();
         switch (input) {
-            case "a" -> print("You decided to buy dragons!");
+            case "a" -> {
+                print("You decided to buy dragons!");
+                var falkor = new Falkor("Falkorito", "male");
+                Player.addDragon(falkor);
+
+            }
             case "b" -> print("You decided to buy food");
             case "c" -> print("You decided to feed your dragons");
             case "d" -> print("You decided to pair dragons");

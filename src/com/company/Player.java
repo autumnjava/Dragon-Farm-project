@@ -6,12 +6,14 @@ public class Player {
 
     private String name;
     private int moneyBalance = 15000; //start summa
-    private static ArrayList<Dragon> dragonsOwned = new ArrayList<>();
+    private ArrayList<Dragon> dragonsOwned = new ArrayList<>();
     private ArrayList<Food> foodOwned = new ArrayList<>();
     private Game game;
 
     public Player(String name){
         this.name = name;
+        this.dragonsOwned = new ArrayList<Dragon>();
+        this.foodOwned = new ArrayList<Food>();
     }
 
     public String getName() {
@@ -34,7 +36,7 @@ public class Player {
         return foodOwned;
     }
 
-    public static void addDragon(Dragon dragon){
+    public void addDragon(Dragon dragon){
         dragonsOwned.add(dragon);
     }
 }

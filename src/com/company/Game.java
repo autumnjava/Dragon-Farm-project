@@ -20,9 +20,10 @@ public class Game {
         howManyUsers();
         howManyRounds();
 
-        System.out.println("test see if we get here:");
+/*        System.out.println("test see if we get here:");
         System.out.println(roundsInput + " roundsInput static int ");
         System.out.println(usersInput + " usersInput static int");
+        */
 
         createPlayers(); //creating players ArrayList
 
@@ -32,19 +33,18 @@ public class Game {
 
 
     private void main() {
-        int roundsCounter = 0;
+        int roundsCounter = 1;
         do{
             for(var player: players){
-                System.out.println("Now playing round number: " + roundsCounter+1);
-                print("\n".repeat(5) + "Right now playing: " + player.getName() +
+                System.out.println("\n".repeat(5) + "Current round number: " + roundsCounter);
+                print("Right now playing: " + player.getName() +
                         ". Your balance is: " + player.getMoneyBalance());
                 menuChoice();
             }
             roundsCounter++;
-        } while(roundsCounter < roundsInput);
+        } while(roundsCounter <= roundsInput);
 
-
-        System.out.println("We have now played " + roundsCounter + " rounds. Which was maximum for this game.");
+        System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         if(prompt("Play again? (y/n)?").equals("n")){
             System.exit(0);

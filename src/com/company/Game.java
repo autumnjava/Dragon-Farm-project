@@ -20,6 +20,14 @@ public class Game {
         System.out.println("Testing:");
         System.out.println(players.size());
         System.out.println(players.get(0).getName());
+        System.out.println(players.get(0).getMoneyBalance());
+        players.get(0).setMoneyBalance(25000);
+
+        System.out.println("Now testing all players");
+        for(var player: players){
+            System.out.println(player.getName());
+            System.out.println(player.getMoneyBalance());
+        }
 
         main(); //restart the game
 

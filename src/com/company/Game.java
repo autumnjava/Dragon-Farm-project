@@ -33,21 +33,7 @@ public class Game {
 
 
     private void main() {
-        int roundsCounter = 1;
-        do{
-            for(var player: players){
-                print("\n".repeat(20) + "-".repeat(50));
-                print( "Current round number: " + roundsCounter);
-                print("Right now playing: " + player.getName().toUpperCase() +
-                        ". Your balance is: " + player.getMoneyBalance());
-                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned() + "\n" : "");
-                System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
-                print("-".repeat(50));
-                menuChoice();
-            }
-            roundsCounter++;
-        } while(roundsCounter <= roundsInput);
-
+        menuChoice();
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
@@ -107,31 +93,45 @@ public class Game {
     }
 
     public void menuChoice(){
-        System.out.println("You will now get 5 menu choices:");
-        System.out.println("a. Buy dragons" +
-                "\nb. Buy food" +
-                "\nc. Feed dragons" +
-                "\nd. Pair dragons (50-50 chance to succeed)" +
-                "\ne. Sell dragons");
-        var input = scanner.nextLine();
-        switch (input) {
-            case "a" -> {
-                print("You decided to buy dragons!");
-                var falkor = new Falkor("Falkorito", "male");
-                Player.addDragon(falkor);
+        int roundsCounter = 1;
+        do{
+            for(var player: players) {
+                print("\n".repeat(20) + "-".repeat(50));
+                print("Current round number: " + roundsCounter);
+                print("Right now playing: " + player.getName().toUpperCase() +
+                        ". Your balance is: " + player.getMoneyBalance());
+                System.out.print(player.getDragonsOwned().size() > 0 ? "Dragons owned : " + player.getDragonsOwned().toString() + "\n" : "");
+                System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
+                print("-".repeat(50));
 
+                System.out.println(player.getName() + ", you will now get 5 menu choices:");
+                System.out.println("a. Buy dragons" +
+                        "\nb. Buy food" +
+                        "\nc. Feed dragons" +
+                        "\nd. Pair dragons (50-50 chance to succeed)" +
+                        "\ne. Sell dragons");
+                var input = scanner.nextLine();
+                switch (input) {
+                    case "a" -> {
+                        print("You decided to buy dragons!");
+                        var falkor = new Falkor("Falkorito", "male");
+                        player.addDragon(falkor);
+
+                    }
+                    case "b" -> print("You decided to buy food");
+                    case "c" -> print("You decided to feed your dragons");
+                    case "d" -> print("You decided to pair dragons");
+                    case "e" -> print("You decided to sell dragons");
+                    default -> {
+                        print("Wrong input! Try again!\n"); //start the method again
+                        menuChoice();
+                    }
+
+                }
             }
-            case "b" -> print("You decided to buy food");
-            case "c" -> print("You decided to feed your dragons");
-            case "d" -> print("You decided to pair dragons");
-            case "e" -> print("You decided to sell dragons");
-            default -> {
-                print("Wrong input! Try again!\n"); //start the method again
-                menuChoice();
-            }
+            roundsCounter++;
+        } while(roundsCounter <= roundsInput);
         }
-    }
-
 
     public void playAgain(){
         var input = (prompt("Play again? (y/n)?"));

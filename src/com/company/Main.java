@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        //new Game();
+        new Game();
 
-        //testing to create new Dragons
+/*        //testing to create new Dragons
         Dragon[] temp = {
                 new Falkor("Falkorito", "male"),
                 new Viserion("Ok", "female")
@@ -23,7 +23,9 @@ public class Main {
                 case "Falkor" -> ((Falkor) dragon).fly();
                 case "Viserion" -> ((Viserion) dragon).fly();
             }
-        }
+        }*/
+
+
 
 
     }

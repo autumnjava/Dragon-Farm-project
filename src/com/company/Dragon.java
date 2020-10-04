@@ -23,4 +23,6 @@ public abstract class Dragon {
         this.gender = gender;
         this.price = prices[classIndex];
     }
+
+    public abstract void fly();
 }

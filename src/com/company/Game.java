@@ -52,11 +52,9 @@ public class Game {
 
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
-        if(prompt("Play again? (y/n)?").equals("n")){
-            System.exit(0);
-        }
-        // create a new game
-        new Game();
+        playAgain(); //asks user if he wants to play again and creates a new game if so.
+
+
     }
 
     public void howManyUsers(){
@@ -132,6 +130,17 @@ public class Game {
     }
 
 
+    public void playAgain(){
+        var input = (prompt("Play again? (y/n)?"));
+                switch(input){
+            case "y" -> new Game();
+            case "n" -> System.exit(0);
+            default -> {
+                print("Wrong input! Try again");
+                playAgain();
+            }
+                }
+    }
 
 
     //just a bunch of help methods

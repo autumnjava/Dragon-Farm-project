@@ -109,7 +109,6 @@ public class Game {
                         print("You decided to buy dragons!");
                         var dragon = FactoryStore.askAndCreateDragon();
                         player.addDragonToList(dragon);
-
                     }
                     case "b" -> print("You decided to buy food");
                     case "c" -> print("You decided to feed your dragons");

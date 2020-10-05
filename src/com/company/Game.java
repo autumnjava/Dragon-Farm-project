@@ -27,7 +27,6 @@ public class Game {
         System.out.println(usersInput + " usersInput static int");
         */
 
-        createPlayers(); //creating players ArrayList
 
         do {
             for (var player : players) {
@@ -59,8 +58,13 @@ public class Game {
                     names[i] = prompt("Player " + (i + 1) + " name"
                             + " (space + enter for \"" + names[i] + "\"):", names[i]);
                 }
+                //creating players
+                System.out.println("Creating player(s)");
+                for (int i = 0; i < usersInput; i++) {
+                    System.out.println(names[i]);
+                    players.add(new Player(names[i]));
+                }
             }
-
         } catch (Exception e) {
             print(error);
             howManyUsers();
@@ -83,14 +87,6 @@ public class Game {
         } catch (Exception e) {
             System.out.println(error);
             howManyRounds();
-        }
-    }
-
-    public void createPlayers() {
-        System.out.println("Creating player(s)");
-        for (int i = 0; i < usersInput; i++) {
-            System.out.println(names[i]);
-            players.add(new Player(names[i]));
         }
     }
 

@@ -37,7 +37,6 @@ public class Player {
     }
 
 
-
     public void getAllDragonsNames(){
         for(var dragon: dragonsOwned){
             System.out.println(dragon.presentYourself());

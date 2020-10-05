@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
+
     static Scanner scanner = new Scanner(System.in);
     private FactoryStore factoryStore = new FactoryStore();
     private ArrayList<Player> players = new ArrayList<>();
     private boolean isRunning = true;
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
     private static int usersInput, roundsInput;
+    private int roundsCounter = 1;
 
-    public Game(String ...newNames) {
+    public Game(String... newNames) {
         print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
         print("created by Aleksandr S.\n2020 Malmö.\n" + "-".repeat(30));
         // start the game
@@ -27,14 +29,21 @@ public class Game {
 
         createPlayers(); //creating players ArrayList
 
-        menuChoice();
+        do {
+            for (var player : players) {
+                menuChoice(player);
+            }
+        roundsCounter++;
+        }
+        while (roundsCounter <= roundsInput);
+
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
 
     }
 
-    public void howManyUsers(){
+    public void howManyUsers() {
         String error = "ONLY DIGITS [1-4]! Try again";
         print("\n\nEnter how many users are going to play this game [1-4]");
         try {
@@ -46,7 +55,7 @@ public class Game {
             } else {
                 print("You have entered " + usersInput);
 
-                for(var i = 0; i < usersInput; i++){
+                for (var i = 0; i < usersInput; i++) {
                     names[i] = prompt("Player " + (i + 1) + " name"
                             + " (space + enter for \"" + names[i] + "\"):", names[i]);
                 }
@@ -77,52 +86,48 @@ public class Game {
         }
     }
 
-    public void createPlayers(){
+    public void createPlayers() {
         System.out.println("Creating player(s)");
-        for(int i = 0; i < usersInput; i++){
+        for (int i = 0; i < usersInput; i++) {
             System.out.println(names[i]);
             players.add(new Player(names[i]));
         }
     }
 
-    public void menuChoice(){
-        int roundsCounter = 1;
-        do{
-            for(var player: players) {
-                print("\n".repeat(20) + "-".repeat(50));
-                print("Current round number: " + roundsCounter);
-                print("Right now playing: " + player.getName().toUpperCase() +
-                        ". Your balance is: " + player.getMoneyBalance());
-                player.getAllDragonsNames();
-                System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
-                print("-".repeat(50));
+    public void menuChoice(Player player) {
+        print("\n".repeat(20) + "-".repeat(50));
+        print("Current round number: " + roundsCounter);
+        print("Right now playing: " + player.getName().toUpperCase() +
+                ". Your balance is: " + player.getMoneyBalance());
+        player.getAllDragonsNames();
+        System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
+        print("-".repeat(50));
 
-                System.out.println(player.getName() + ", you will now get 5 menu choices:");
-                System.out.println("a. Buy dragons" +
-                        "\nb. Buy food" +
-                        "\nc. Feed dragons" +
-                        "\nd. Pair dragons (50-50 chance to succeed)" +
-                        "\ne. Sell dragons");
-                var input = scanner.nextLine();
-                switch (input) {
-                    case "a" -> {
-                        print("You decided to buy dragons!");
-                        var dragon = FactoryStore.askAndCreateDragon();
-                        player.addDragonToList(dragon);
-                    }
-                    case "b" -> print("You decided to buy food");
-                    case "c" -> print("You decided to feed your dragons");
-                    case "d" -> print("You decided to pair dragons");
-                    case "e" -> print("You decided to sell dragons");
-                    default -> {
-                        print("Wrong input! Try again!\n"); //start the method again
-                        menuChoice();
-                    }
-                }
+        System.out.println(player.getName() + ", you will now get 5 menu choices:");
+        System.out.println("a. Buy dragons" +
+                "\nb. Buy food" +
+                "\nc. Feed dragons" +
+                "\nd. Pair dragons (50-50 chance to succeed)" +
+                "\ne. Sell dragons");
+        var input = scanner.nextLine();
+        switch (input) {
+            case "a" -> {
+                print("You decided to buy dragons!");
+                var dragon = FactoryStore.askAndCreateDragon();
+                player.addDragonToList(dragon);
             }
-            roundsCounter++;
-        } while(roundsCounter <= roundsInput);
+            case "b" -> print("You decided to buy food");
+            case "c" -> print("You decided to feed your dragons");
+            case "d" -> print("You decided to pair dragons");
+            case "e" -> print("You decided to sell dragons");
+            default -> {
+                print("Wrong input! Try again!\n");
+                menuChoice(player);
+                //how to start method again without changing player?
+            }
         }
+    }
+
 
     public void playAgain(){
         var input = (prompt("Play again? (y/n)?"));

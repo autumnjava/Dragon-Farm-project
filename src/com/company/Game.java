@@ -8,7 +8,6 @@ public class Game {
     static Scanner scanner = new Scanner(System.in);
     private FactoryStore factoryStore = new FactoryStore();
     private ArrayList<Player> players = new ArrayList<>();
-    private boolean isRunning = true;
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
     private static int usersInput, roundsInput;
     private int roundsCounter = 1;

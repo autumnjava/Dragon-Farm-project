@@ -31,8 +31,7 @@ public class Game {
                 menuChoice(player);
             }
         roundsCounter++;
-        }
-        while (roundsCounter <= roundsInput);
+        } while (roundsCounter <= roundsInput);
 
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 

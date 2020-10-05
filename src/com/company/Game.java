@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-
-    static Scanner scanner = new Scanner(System.in);
-    private FactoryStore factoryStore = new FactoryStore();
-    private ArrayList<Player> players = new ArrayList<>();
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
-    private static int usersInput, roundsInput;
+    private static int roundsInput;
+    static Scanner scanner = new Scanner(System.in);
+
+    private ArrayList<Player> players = new ArrayList<>();
     private int roundsCounter = 1;
 
     public Game(String... newNames) {
@@ -46,7 +45,7 @@ public class Game {
         print("\n\nEnter how many users are going to play this game [1-4]");
         try {
             var userInput = scanner.nextLine();
-            usersInput = Integer.parseInt(userInput);
+            int usersInput = Integer.parseInt(userInput);
             if (usersInput < 1 || usersInput > 4) {
                 System.out.println(error);
                 howManyUsers();

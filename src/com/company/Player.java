@@ -36,10 +36,35 @@ public class Player {
         return foodOwned;
     }
 
-    public void addDragon(){
-        var falkor = new Falkor("Falkorito", "male");
-        this.dragonsOwned.add(falkor);
+    public void buyDragon(){
+        var input = Game.prompt("Choose a dragon:\na. Lockheed\nb. Falkor\nc. Smaug" +
+                "\nd. Toothless\ne. Viserion");
+        var inputChar = input.charAt(0);
+        if(inputChar != 'a' && inputChar != 'b' && inputChar != 'c'
+        && inputChar != 'd' && inputChar != 'e') {
+            System.out.println("ERROR! try again");
+            buyDragon();
+        } else {
+            System.out.println("Creating dragon!");
+            askAndCreateDragon(inputChar);
+        }
+    }
 
+    public void askAndCreateDragon(char input){
+        var name = Game.prompt("Enter a name of a dragon:");
+        var gender = Game.prompt("Enter a gender [male/female]:");
+        if(!gender.equals("male") && !gender.equals("female")){
+            System.out.println("Wrong input! Try again");
+            gender = Game.prompt("Enter a gender [male/female]:");
+        }
+        switch(input){
+            case 'a' -> this.dragonsOwned.add(new Lockheed(name, gender));
+            case 'b' -> this.dragonsOwned.add(new Falkor(name, gender));
+            case 'c' -> this.dragonsOwned.add(new Smaug(name, gender));
+            case 'd' -> this.dragonsOwned.add(new Toothless(name, gender));
+            case 'e'-> this.dragonsOwned.add(new Viserion(name, gender));
+            default -> System.out.println("Error");
+        }
     }
 
     public void getAllDragonsNames(){

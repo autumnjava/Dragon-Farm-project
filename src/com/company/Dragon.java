@@ -24,8 +24,6 @@ public abstract class Dragon {
         this.price = prices[classIndex];
     }
 
-    public abstract void fly();
-
     public String presentYourself(){
         return name;
     }

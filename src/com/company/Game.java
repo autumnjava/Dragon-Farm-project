@@ -107,8 +107,7 @@ public class Game {
                 switch (input) {
                     case "a" -> {
                         print("You decided to buy dragons!");
-
-                        player.addDragon();
+                        player.buyDragon();
 
                     }
                     case "b" -> print("You decided to buy food");

@@ -17,7 +17,6 @@ public abstract class Dragon {
 
     public Dragon (String name, String gender) {
         var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
-
         this.name = name;
         this.gender = gender;
         this.dragonPrice = prices[classIndex];

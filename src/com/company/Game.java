@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
+    static Scanner scanner = new Scanner(System.in);
     private static String[] names = {"Player 1", "Player 2", "Player 3", "Player 4"};
     private static int roundsInput;
-    static Scanner scanner = new Scanner(System.in);
+    private static int roundsCounter = 1;
 
     private ArrayList<Player> players = new ArrayList<>();
-    private int roundsCounter = 1;
+
 
     public Game(String... newNames) {
         print("\n".repeat(20) + "Welcome to Dragon Farm\n" + "-".repeat(30));
@@ -93,7 +94,7 @@ public class Game {
         }
     }
 
-    public void menuChoice(Player player) {
+    public static void menuChoice(Player player) {
         print("\n".repeat(20) + "-".repeat(50));
         print("Current round number: " + roundsCounter);
         print("Right now playing: " + player.getName().toUpperCase() +
@@ -107,7 +108,9 @@ public class Game {
                 "\nb. Buy food" +
                 "\nc. Feed dragons" +
                 "\nd. Pair dragons (50-50 chance to succeed)" +
-                "\ne. Sell dragons");
+                "\ne. Sell dragons" +
+                "\nx. Do nothing. Jump to next player"
+        );
         var input = scanner.nextLine();
         switch (input) {
             case "a" -> {
@@ -119,6 +122,7 @@ public class Game {
             case "c" -> print("You decided to feed your dragons");
             case "d" -> print("You decided to pair dragons");
             case "e" -> print("You decided to sell dragons");
+            case "x" -> print("Better luck next time!");
             default -> {
                 print("Wrong input! Try again!\n");
                 menuChoice(player);
@@ -153,9 +157,4 @@ public class Game {
         var answer = scanner.nextLine().trim(); // trim removes spaces at start & end
         return answer.equals("") && _default.length > 0 ? _default[0] : answer;
     }
-
-
-
-
-
     }

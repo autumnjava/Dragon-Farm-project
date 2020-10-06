@@ -7,13 +7,11 @@ public class FactoryStore {
     public HashMap<Object, Integer> dragonPrice = new HashMap<>();
     public ArrayList<Dragon> usedDragons = new ArrayList<>();
     public ArrayList<Player> players = new ArrayList<>();
-    private int price;
 
 
     public static Dragon askAndCreateDragon(Player player) {
         var input = Game.prompt("Choose a dragon:\na. Lockheed [4000]\nb. Falkor [5000]\nc. Smaug [6000]" +
                 "\nd. Toothless[7000]\ne. Viserion[8000]");
-
         var inputChar = input.charAt(0);
         if (inputChar != 'a' && inputChar != 'b' && inputChar != 'c'
                 && inputChar != 'd' && inputChar != 'e') {
@@ -26,6 +24,7 @@ public class FactoryStore {
                     //check if player has enough cash
                     if(player.getMoneyBalance() < Lockheed.initialPrice){
                         System.out.println("Not enough money!");
+
                     } else {
                         player.setMoneyBalance(player.getMoneyBalance()-Lockheed.initialPrice);
                         return new Lockheed(askName(), askGender());
@@ -58,15 +57,13 @@ public class FactoryStore {
         if (gender.equals("male")){
             return "male";
         }
-
         else if(gender.equals("female")){
             return "female";
         }
         else{
-            askGender();
+            return askGender();
         }
-            return null; //in theory we shall not get here!
-        }
+    }
 
 
 }

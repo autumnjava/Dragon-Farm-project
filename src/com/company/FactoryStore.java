@@ -11,8 +11,9 @@ public class FactoryStore {
 
 
     public static Dragon askAndCreateDragon(Player player) {
-        var input = Game.prompt("Choose a dragon:\na. Lockheed price: \nb. Falkor\nc. Smaug" +
-                "\nd. Toothless\ne. Viserion");
+        var input = Game.prompt("Choose a dragon:\na. Lockheed [4000]\nb. Falkor [5000]\nc. Smaug [6000]" +
+                "\nd. Toothless[7000]\ne. Viserion[8000]");
+
         var inputChar = input.charAt(0);
         if (inputChar != 'a' && inputChar != 'b' && inputChar != 'c'
                 && inputChar != 'd' && inputChar != 'e') {
@@ -23,10 +24,13 @@ public class FactoryStore {
                 case 'a' -> {
                     System.out.println("Ok so you want to buy a Lockheed");
                     //check if player has enough cash
-//                    if(player.getMoneyBalance() < Dragon.p){
-//                        System.out.println("Not enough money!");
-//                    } else
-                    return new Lockheed(askName(), askGender());
+                    if(player.getMoneyBalance() < Lockheed.initialPrice){
+                        System.out.println("Not enough money!");
+                    } else {
+                        player.setMoneyBalance(player.getMoneyBalance()-Lockheed.initialPrice);
+                        return new Lockheed(askName(), askGender());
+                    }
+
                 }
                 case 'b' -> {
                     return new Falkor(askName(), askGender());

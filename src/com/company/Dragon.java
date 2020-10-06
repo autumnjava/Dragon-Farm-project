@@ -23,16 +23,14 @@ public abstract class Dragon {
     }
 
     public String presentYourself(){
-        return name + " at price " + dragonPrice + " its health: " + healthPercent;
-    }
-
-    public int decreaseHealth(Dragon dragon, int roundsCounter, int maxRounds){
-        do {
-            return this.healthPercent - 10;
-        } while(roundsCounter<=maxRounds);
+        return name + " at price " + dragonPrice + " its health: " + getHealthPercent();
     }
 
     public int getHealthPercent() {
         return healthPercent;
+    }
+
+    public int decreaseHealth() {
+        return healthPercent -= 10;
     }
 }

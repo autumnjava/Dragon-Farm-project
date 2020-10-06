@@ -27,6 +27,10 @@ public class Player {
         this.moneyBalance = moneyBalance;
     }
 
+    public ArrayList<Dragon> getDragonsOwned() {
+        return dragonsOwned;
+    }
+
     public ArrayList<Food> getFoodOwned() {
         return foodOwned;
     }

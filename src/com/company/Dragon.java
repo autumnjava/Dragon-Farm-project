@@ -14,6 +14,7 @@ public abstract class Dragon {
     private int healthPercent = 100;
     private int dragonPrice;
 
+
     public Dragon (String name, String gender) {
         var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
 
@@ -26,11 +27,17 @@ public abstract class Dragon {
         return name + " at price " + dragonPrice + " its health: " + getHealthPercent();
     }
 
+    public int getPrice(){
+        var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
+        return dragonPrice = prices[classIndex];
+    }
+
     public int getHealthPercent() {
         return healthPercent;
     }
 
     public int decreaseHealth() {
-        return healthPercent -= 10;
+        var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
+        return healthPercent -= randomNr;
     }
 }

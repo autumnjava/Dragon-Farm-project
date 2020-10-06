@@ -36,10 +36,12 @@ public class Player {
     }
 
 
-    public void addDragonToList(Dragon dragon){
-        this.dragonsOwned.add(dragon);
+    public void addDragonToList(Dragon dragon, Player player){
+        if(dragon != null){
+            this.dragonsOwned.add(dragon);
+        } else
+            Game.menuChoice(player);
     }
-
 
     public void getAllDragonsNames(){
         for(var dragon: dragonsOwned){

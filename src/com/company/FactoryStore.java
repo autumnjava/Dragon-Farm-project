@@ -10,6 +10,7 @@ public class FactoryStore {
 
 
     public static Dragon askAndCreateDragon(Player player) {
+
         var input = Game.prompt("Choose a dragon:\na. Lockheed [4000]\nb. Falkor [5000]\nc. Smaug [6000]" +
                 "\nd. Toothless[7000]\ne. Viserion[8000]");
         var inputChar = input.charAt(0);
@@ -22,30 +23,47 @@ public class FactoryStore {
                 case 'a' -> {
                     System.out.println("Ok so you want to buy a Lockheed");
                     //check if player has enough cash
-                    if(player.getMoneyBalance() < Lockheed.initialPrice){
+                    if (player.getMoneyBalance() < Lockheed.initialPrice) {
                         System.out.println("Not enough money!");
-
                     } else {
-                        player.setMoneyBalance(player.getMoneyBalance()-Lockheed.initialPrice);
+                        player.setMoneyBalance(player.getMoneyBalance() - Lockheed.initialPrice);
                         return new Lockheed(askName(), askGender());
                     }
-
                 }
                 case 'b' -> {
-                    return new Falkor(askName(), askGender());
+                    if (player.getMoneyBalance() < Falkor.initialPrice) {
+                        System.out.println("Not enough money!");
+                    } else {
+                        player.setMoneyBalance(player.getMoneyBalance() - Falkor.initialPrice);
+                        return new Falkor(askName(), askGender());
+                    }
                 }
                 case 'c' -> {
-                    return new Smaug(askName(), askGender());
+                    if (player.getMoneyBalance() < Smaug.initialPrice) {
+                        System.out.println("Not enough money!");
+                    } else {
+                        player.setMoneyBalance(player.getMoneyBalance() - Smaug.initialPrice);
+                        return new Smaug(askName(), askGender());
+                    }
                 }
                 case 'd' -> {
-                    return new Toothless(askName(), askGender());
+                    if (player.getMoneyBalance() < Toothless.initialPrice) {
+                        System.out.println("Not enough money!");
+                    } else {
+                        player.setMoneyBalance(player.getMoneyBalance() - Toothless.initialPrice);
+                        return new Toothless(askName(), askGender());
+                    }
                 }
                 case 'e' -> {
-                    return new Viserion(askName(), askGender());
+                    if (player.getMoneyBalance() < Viserion.initialPrice) {
+                        System.out.println("Not enough money!");
+                    } else {
+                        player.setMoneyBalance(player.getMoneyBalance() - Viserion.initialPrice);
+                        return new Viserion(askName(), askGender());
+                    }
                 }
             }
         }
-        //Theoretically we should not get here.
         return null;
     }
     public static String askName(){
@@ -64,6 +82,4 @@ public class FactoryStore {
             return askGender();
         }
     }
-
-
 }

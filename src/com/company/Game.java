@@ -29,8 +29,14 @@ public class Game {
         do {
             for (var player : players) {
                 menuChoice(player);
+                //checking if player has dragons.
+                if(player.getDragonsOwned().size()>0){
+                    for(var dragon: player.getDragonsOwned()){
+                        dragon.decreaseHealth();
+                    }
+                }
             }
-        roundsCounter++;
+            roundsCounter++;
         } while (roundsCounter <= roundsInput);
 
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");

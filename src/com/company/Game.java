@@ -34,6 +34,11 @@ public class Game {
                 if(player.getDragonsOwned().size()>0){
                     for(var dragon: player.getDragonsOwned()){
                         dragon.decreaseHealth();
+                        if(dragon.getHealthPercent() <= 0 && player.getDragonsOwned().size() > 0){
+                            System.out.println("Dragon died. removing dragon from list.");
+                            player.getDragonsOwned().remove(dragon);
+                            menuChoice(player);
+                        }
                     }
                 }
             }
@@ -100,6 +105,7 @@ public class Game {
         print("Right now playing: " + player.getName().toUpperCase() +
                 ". Your balance is: " + player.getMoneyBalance());
         player.getAllDragonsNames();
+
         System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
         print("-".repeat(50));
 
@@ -116,7 +122,7 @@ public class Game {
             case "a" -> {
                 print("You decided to buy dragons!");
                 var dragon = FactoryStore.askAndCreateDragon(player);
-                player.addDragonToList(dragon);
+                player.addDragonToList(dragon, player);
             }
             case "b" -> print("You decided to buy food");
             case "c" -> print("You decided to feed your dragons");

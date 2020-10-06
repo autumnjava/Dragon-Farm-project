@@ -3,8 +3,8 @@ package com.company;
 import java.util.Arrays;
 
 public abstract class Dragon {
-//    static String[] dragonClasses = {"Lockheed", "Falkor", "Smaug", "Toothless", "Viserion"};
-//    static int[] prices = {4000, 5000, 6000, 7000, 8000};
+    static String[] dragonClasses = {"Lockheed", "Falkor", "Smaug", "Toothless", "Viserion"};
+    static int[] prices = {4000, 5000, 6000, 7000, 8000};
     static String[] acceptedFood = {"Meat, Fish", "Meat, Grass", "Grass, Metal",
             "Fish", "Metal"};
 
@@ -12,22 +12,24 @@ public abstract class Dragon {
     public String name;
     private String gender;
     private int healthPercent = 100;
-    //private int dragonPrice;
+    private int dragonPrice;
 
     public Dragon (String name, String gender) {
-//        var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
+        var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
 
         this.name = name;
         this.gender = gender;
-        //this.dragonPrice = prices[classIndex];
+        this.dragonPrice = prices[classIndex];
     }
 
     public String presentYourself(){
-        return name;
+        return name + " at price " + dragonPrice + " its health: " + healthPercent;
     }
 
-    public int decreaseHealth(){
-        return healthPercent-10;
+    public int decreaseHealth(Dragon dragon, int roundsCounter, int maxRounds){
+        do {
+            return this.healthPercent - 10;
+        } while(roundsCounter<=maxRounds);
     }
 
     public int getHealthPercent() {

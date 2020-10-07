@@ -1,7 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     static Scanner scanner = new Scanner(System.in);
@@ -18,32 +17,10 @@ public class Game {
         // start the game
         names = newNames.length < 4 ? names : newNames;
 
-        howManyUsers();
-        howManyRounds();
+        howManyUsers(); //ask user how many users is going to play, enter their names
+        howManyRounds(); //ask user how many rounds they want to play
+        makeMove();
 
-/*        System.out.println("test see if we get here:");
-        System.out.println(roundsInput + " roundsInput static int ");
-        System.out.println(usersInput + " usersInput static int");
-        */
-
-
-        do {
-            for (var player : players) {
-                menuChoice(player);
-                //checking if player has dragons.
-                if(player.getDragonsOwned().size()>0){
-                    for(var dragon: player.getDragonsOwned()){
-                        dragon.decreaseHealth();
-                        if(dragon.getHealthPercent() <= 0 && player.getDragonsOwned().size() > 0){
-                            System.out.println("Dragon died. removing dragon from list.");
-                            player.getDragonsOwned().remove(dragon);
-                            menuChoice(player);
-                        }
-                    }
-                }
-            }
-            roundsCounter++;
-        } while (roundsCounter <= roundsInput);
 
         System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
@@ -99,12 +76,33 @@ public class Game {
         }
     }
 
-    public static void menuChoice(Player player) {
+    public void makeMove(){
+        do {
+            for (var player : players) {
+                //System.out.println(store.dragonsYouCanBuy(player));
+                menuChoice(player);
+                //checking if player has dragons.
+                if(player.getDragonsOwned().size()>0){
+                    for(var dragon: player.getDragonsOwned()){
+                        dragon.decreaseHealth();
+                        if(dragon.getHealthPercent() <= 0 && player.getDragonsOwned().size() > 0){
+                            System.out.println("Dragon died. removing dragon from list.");
+                            player.getDragonsOwned().remove(dragon);
+                            menuChoice(player);
+                        }
+                    }
+                }
+            }
+            roundsCounter++;
+        } while (roundsCounter <= roundsInput);
+    }
+
+    public void menuChoice(Player player) {
         print("\n".repeat(20) + "-".repeat(50));
         print("Current round number: " + roundsCounter);
         print("Right now playing: " + player.getName().toUpperCase() +
                 ". Your balance is: " + player.getMoneyBalance());
-        player.getAllDragonsNames();
+        player.getAllDragons();
 
         System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
         print("-".repeat(50));
@@ -120,9 +118,10 @@ public class Game {
         var input = scanner.nextLine();
         switch (input) {
             case "a" -> {
-                print("You decided to buy dragons!");
-                var dragon = FactoryStore.askAndCreateDragon(player);
-                player.addDragonToList(dragon, player);
+                //var dragon = FactoryStore.askAndCreateDragon(player);
+                //player.addDragonToList(dragon, player);
+                FactoryStore store = new FactoryStore(this, player);
+                store.dragonsYouCanBuy();
             }
             case "b" -> print("You decided to buy food");
             case "c" -> print("You decided to feed your dragons");
@@ -149,7 +148,7 @@ public class Game {
             }
                 }
     }
-
+    
 
     //just a bunch of help methods
     static public void print(String x){

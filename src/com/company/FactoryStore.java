@@ -1,71 +1,48 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class FactoryStore {
-    public HashMap<Object, Integer> dragonPrice = new HashMap<>();
-    public ArrayList<Dragon> usedDragons = new ArrayList<>();
-    public ArrayList<Player> players = new ArrayList<>();
+    private Player player;
+    private Game game;
+    public LinkedHashMap<String, Dragon> dragonsForSale;
+    public LinkedHashMap<String, Food> foodForSale;
 
+    public FactoryStore(Game game, Player player){
+        System.out.println("Welcome to the store, " + player.getName());
+        this.game = game;
+        this.player = player;
+        createDragons();
+    }
 
-    public static Dragon askAndCreateDragon(Player player) {
+    private void createDragons(){
+        dragonsForSale = new LinkedHashMap<>();
+        dragonsForSale.put("Lockheed", new Lockheed());
+        dragonsForSale.put("Falkor", new Falkor());
+        dragonsForSale.put("Smaug", new Falkor());
+        dragonsForSale.put("Toothless", new Toothless());
+        dragonsForSale.put("Viserion", new Viserion());
+    }
 
-        var input = Game.prompt("Choose a dragon:\na. Lockheed [4000]\nb. Falkor [5000]\nc. Smaug [6000]" +
-                "\nd. Toothless[7000]\ne. Viserion[8000]");
-        var inputChar = input.charAt(0);
-        if (inputChar != 'a' && inputChar != 'b' && inputChar != 'c'
-                && inputChar != 'd' && inputChar != 'e') {
-            System.out.println("ERROR! try again");
-            askAndCreateDragon(player);
-        } else {
-            switch (inputChar) {
-                case 'a' -> {
-                    System.out.println("Ok so you want to buy a Lockheed");
-                    //check if player has enough cash
-                    if (player.getMoneyBalance() < Lockheed.initialPrice) {
-                        System.out.println("Not enough money!");
-                    } else {
-                        player.setMoneyBalance(player.getMoneyBalance() - Lockheed.initialPrice);
-                        return new Lockheed(askName(), askGender());
-                    }
-                }
-                case 'b' -> {
-                    if (player.getMoneyBalance() < Falkor.initialPrice) {
-                        System.out.println("Not enough money!");
-                    } else {
-                        player.setMoneyBalance(player.getMoneyBalance() - Falkor.initialPrice);
-                        return new Falkor(askName(), askGender());
-                    }
-                }
-                case 'c' -> {
-                    if (player.getMoneyBalance() < Smaug.initialPrice) {
-                        System.out.println("Not enough money!");
-                    } else {
-                        player.setMoneyBalance(player.getMoneyBalance() - Smaug.initialPrice);
-                        return new Smaug(askName(), askGender());
-                    }
-                }
-                case 'd' -> {
-                    if (player.getMoneyBalance() < Toothless.initialPrice) {
-                        System.out.println("Not enough money!");
-                    } else {
-                        player.setMoneyBalance(player.getMoneyBalance() - Toothless.initialPrice);
-                        return new Toothless(askName(), askGender());
-                    }
-                }
-                case 'e' -> {
-                    if (player.getMoneyBalance() < Viserion.initialPrice) {
-                        System.out.println("Not enough money!");
-                    } else {
-                        player.setMoneyBalance(player.getMoneyBalance() - Viserion.initialPrice);
-                        return new Viserion(askName(), askGender());
-                    }
+    public ArrayList<String> dragonsYouCanBuy(){
+        System.out.println("Dragons you can buy:");
+        ArrayList<String> dragonsAvailable = new ArrayList<>();
+
+            for (var dragon: dragonsForSale.keySet()){
+                if(player.getMoneyBalance() >= dragonsForSale.get(dragon).getDragonPrice()){
+                    dragonsAvailable.add(dragon);
+                    System.out.println(dragonsAvailable.size() + ". " + dragon + " at price " +
+                            dragonsForSale.get(dragon).getDragonPrice());
                 }
             }
+
+        if(dragonsAvailable.size() == 0){
+            System.out.println("You cant buy anything, sorry!");
+            //jumps to next player
         }
-        return null;
+return dragonsAvailable;
     }
+
     public static String askName(){
         return Game.prompt("Enter a name of a dragon:");
     }

@@ -43,9 +43,9 @@ public class Player {
             Game.menuChoice(player);
     }
 
-    public void getAllDragonsNames(){
+    public void getAllDragons(){
         for(var dragon: dragonsOwned){
-            System.out.println(dragon.presentYourself());
+            System.out.println(dragon.getName() + " at price " + dragon.getPrice() + " its health: " + dragon.getHealthPercent());
         }
     }
 }

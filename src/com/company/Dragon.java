@@ -1,39 +1,50 @@
 package com.company;
 
-import java.util.Arrays;
-
 public abstract class Dragon {
-    static String[] dragonClasses = {"Lockheed", "Falkor", "Smaug", "Toothless", "Viserion"};
-    static int[] prices = {4000, 5000, 6000, 7000, 8000};
-    static String[] acceptedFood = {"Meat, Fish", "Meat, Grass", "Grass, Metal",
-            "Fish", "Metal"};
-
-
     private String name;
     private String gender;
-    private int healthPercent = 100;
+    private int healthPercent;
     private int dragonPrice;
+    private Player owner;
+    private int age;
+    private int maxAge;
 
-
-    public Dragon (String name, String gender) {
-        var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
+    public Dragon (String name, String gender, Player owner, int dragonPrice, int healthPercent, int age, int mageAxe) {
         this.name = name;
         this.gender = gender;
-        this.dragonPrice = prices[classIndex];
+        this.owner = owner;
+        this.dragonPrice = dragonPrice;
+        this.healthPercent = healthPercent;
+        this.age = age;
+        this.maxAge = mageAxe;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-
-    public int getPrice(){
-        var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());
-        return dragonPrice = prices[classIndex];
+    public String getGender() {
+        return gender;
     }
 
     public int getHealthPercent() {
         return healthPercent;
+    }
+
+    public int getDragonPrice() {
+        return dragonPrice;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
     }
 
     public int decreaseHealth() {

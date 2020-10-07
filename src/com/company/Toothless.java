@@ -1,16 +1,11 @@
 package com.company;
 
 public class Toothless extends Dragon{
-    public static int initialPrice = 7000;
     public Toothless(){
-
+        super(null, null, null, 7000, 100, 0, 5);
     }
-    public Toothless(String name, String gender){
-        super(name, gender);
-    }
-
-    public void fly(){
-        System.out.println("Toothless flies!");
+    public Toothless(String name, String gender, Player owner){
+        super(name, gender, owner, 7000, 100, 0, 5);
     }
 
 }

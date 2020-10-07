@@ -1,18 +1,11 @@
 package com.company;
 
 public class Falkor extends Dragon {
-    public static int initialPrice = 5000;
 
-   public Falkor(){
-
-   }
-    public Falkor(String name, String gender){
-        super(name, gender);
+    public Falkor(){
+        super(null, null, null, 5000, 100, 0, 5);
     }
-
-    public void fly(){
-        System.out.println("Falkor " + this.getName() + " flies! You better fly high because you cost " + initialPrice + " kr.");
+    public Falkor(String name, String gender, Player owner){
+        super(name, gender, owner, 5000, 100, 0, 5);
     }
-
-
 }

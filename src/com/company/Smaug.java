@@ -1,16 +1,10 @@
 package com.company;
 
 public class Smaug extends Dragon{
-    public static int initialPrice = 6000;
     public Smaug(){
-
+        super(null, null, null, 6000, 100, 0, 5);
     }
-
-    public Smaug(String name, String gender){
-        super(name, gender);
-    }
-
-    public void fly(){
-        System.out.println("Smaug flies!");
+    public Smaug(String name, String gender, Player owner){
+        super(name, gender, owner, 6000, 100, 0, 5);
     }
 }

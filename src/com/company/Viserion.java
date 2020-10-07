@@ -1,16 +1,11 @@
 package com.company;
 
 public class Viserion extends Dragon {
-    public static int initialPrice = 8000;
     public Viserion(){
-
+        super(null, null, null, 8000, 100, 0, 5);
     }
-    public Viserion(String name, String gender){
-        super(name, gender);
-    }
-
-    public void fly(){
-        System.out.println("Viserion flies!");
+    public Viserion(String name, String gender, Player owner){
+        super(name, gender, owner, 8000, 100, 0, 5);
     }
 
 }

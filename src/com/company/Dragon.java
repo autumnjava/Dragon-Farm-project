@@ -9,7 +9,7 @@ public abstract class Dragon {
             "Fish", "Metal"};
 
 
-    public String name;
+    private String name;
     private String gender;
     private int healthPercent = 100;
     private int dragonPrice;
@@ -22,9 +22,10 @@ public abstract class Dragon {
         this.dragonPrice = prices[classIndex];
     }
 
-    public String presentYourself(){
-        return name + " at price " + dragonPrice + " its health: " + getHealthPercent();
+    public String getName(){
+        return name;
     }
+
 
     public int getPrice(){
         var classIndex = Arrays.asList(dragonClasses).indexOf(this.getClass().getSimpleName());

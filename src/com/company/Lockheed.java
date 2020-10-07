@@ -2,6 +2,9 @@ package com.company;
 
 public class Lockheed extends Dragon {
     public static int initialPrice = 4000;
+    public Lockheed(){
+
+    }
     public Lockheed(String name, String gender){
         super(name, gender);
     }

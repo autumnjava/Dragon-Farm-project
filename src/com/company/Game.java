@@ -121,7 +121,8 @@ public class Game {
                 //var dragon = FactoryStore.askAndCreateDragon(player);
                 //player.addDragonToList(dragon, player);
                 FactoryStore store = new FactoryStore(this, player);
-                store.dragonsYouCanBuy();
+                    store.buyDragons();
+
             }
             case "b" -> print("You decided to buy food");
             case "c" -> print("You decided to feed your dragons");

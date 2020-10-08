@@ -8,8 +8,9 @@ public abstract class Dragon {
     private Player owner;
     private int age;
     private int maxAge;
+    private String foodDragonCanEat;
 
-    public Dragon (String name, String gender, Player owner, int dragonPrice, int healthPercent, int age, int mageAxe) {
+    public Dragon (String name, String gender, Player owner, int dragonPrice, int healthPercent, int age, int mageAxe, String foodDragonCanEat) {
         this.name = name;
         this.gender = gender;
         this.owner = owner;
@@ -17,6 +18,7 @@ public abstract class Dragon {
         this.healthPercent = healthPercent;
         this.age = age;
         this.maxAge = mageAxe;
+        this.foodDragonCanEat = foodDragonCanEat;
     }
 
     public String getName() {

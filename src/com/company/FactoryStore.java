@@ -1,7 +1,7 @@
 package com.company;
 
+import com.company.DragonSubclasses.*;
 import java.util.*;
-import java.util.concurrent.locks.Lock;
 
 public class FactoryStore {
     private Player player;
@@ -29,7 +29,7 @@ public class FactoryStore {
         ArrayList<String> dragonsAvailable = new ArrayList<>();
 
             for (var dragon: dragonsForSale.keySet()){
-                if(player.getMoneyBalance() >= dragonsForSale.get(dragon).getDragonPrice()){
+                if(player.getMoneyBalance() >= dragonsForSale.get(dragon).dragonPrice){
                     dragonsAvailable.add(dragon);
                 }
             }
@@ -88,20 +88,21 @@ return dragonsAvailable;
         }
     }
 
-    public void buyMore(){
-        if(dragonsYouCanBuy().size() > 0) {
-            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-            buyDragons();
-        }
-    }
 
     public void printDragonsYouCanBuy(){
         int counter = 1;
         System.out.println("\n".repeat(20) + "Dragons you can buy:");
         for(var dragon: dragonsYouCanBuy()){
             System.out.println(counter + ". " + dragon + " at price " +
-                    dragonsForSale.get(dragon).getDragonPrice());
+                    dragonsForSale.get(dragon).dragonPrice);
             counter++;
+        }
+    }
+
+    public void buyMore(){
+        if(dragonsYouCanBuy().size() > 0) {
+            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
+            buyDragons();
         }
     }
 
@@ -122,9 +123,12 @@ return dragonsAvailable;
         }
     }
 
+    /**
+     * This is a method that updates players balance
+     * @param dragon To get price of dragon
+     */
+
     public void setBalance(String dragon){
-        player.setMoneyBalance(player.getMoneyBalance() - dragonsForSale.get(dragon).getDragonPrice());
+        player.setMoneyBalance(player.getMoneyBalance() - dragonsForSale.get(dragon).dragonPrice);
     }
-
-
 }

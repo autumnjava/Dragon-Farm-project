@@ -3,9 +3,9 @@ package com.company;
 import java.util.ArrayList;
 
 public class Player {
-
+    private Game game;
     private String name;
-    private int moneyBalance = 15000; //start summa
+    private int moneyBalance = 10000; //start summa
     private ArrayList<Dragon> dragonsOwned;
     private ArrayList<Food> foodOwned;
 
@@ -40,12 +40,12 @@ public class Player {
         if(dragon != null){
             this.dragonsOwned.add(dragon);
         } else
-            Game.menuChoice(player);
+            game.menuChoice(player);
     }
 
     public void getAllDragons(){
         for(var dragon: dragonsOwned){
-            System.out.println(dragon.getName() + " at price " + dragon.getPrice() + " its health: " + dragon.getHealthPercent());
+            System.out.println(dragon.getName() + " at price " + dragon.getDragonPrice() + " its health: " + dragon.getHealthPercent());
         }
     }
 }

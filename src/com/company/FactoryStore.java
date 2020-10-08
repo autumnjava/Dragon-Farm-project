@@ -38,13 +38,7 @@ return dragonsAvailable;
 
     public void buyDragons(){
         if(dragonsYouCanBuy().size()>0 && player.getMoneyBalance()>0){
-            int counter = 1;
-            System.out.println("\n".repeat(20) + "Dragons you can buy:");
-            for(var dragon: dragonsYouCanBuy()){
-                System.out.println(counter + ". " + dragon + " at price " +
-                        dragonsForSale.get(dragon).getDragonPrice());
-                counter++;
-            }
+            printDragonsYouCanBuy();
             try{
                 System.out.println("NOTE: enter 999 to next player / next round");
                 var input = Game.prompt("Which one you want to buy? [1-"
@@ -58,60 +52,56 @@ return dragonsAvailable;
                     case 1-> {
                         player.getDragonsOwned().add(new Lockheed(askName(), askGender(), player));
                         setBalance("Lockheed");
-
-                        if(dragonsYouCanBuy().size() > 0) {
-                            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-                            buyDragons();
-                        }
-
+                        buyMore();
                     }
                     case 2 -> {
                         player.getDragonsOwned().add(new Falkor(askName(), askGender(), player));
                         setBalance("Falkor");
-
-                        if(dragonsYouCanBuy().size() > 0) {
-                            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-                            buyDragons();
-                        }
+                        buyMore();
                     }
                     case 3 -> {
                         player.getDragonsOwned().add(new Smaug(askName(), askGender(), player));
                         setBalance("Smaug");
-
-                        if(dragonsYouCanBuy().size() > 0) {
-                            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-                            buyDragons();
-                        }
+                        buyMore();
                     }
                     case 4 -> {
                         player.getDragonsOwned().add(new Toothless(askName(), askGender(), player));
                         setBalance("Toothless");
-                        if(dragonsYouCanBuy().size() > 0) {
-                            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-                            buyDragons();
-                        }
-
+                        buyMore();
                     }
                     case 5 -> {
                         player.getDragonsOwned().add(new Viserion(askName(), askGender(), player));
                         setBalance("Viserion");
-                        if(dragonsYouCanBuy().size() > 0) {
-                            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
-                            buyDragons();
-                        }
-
+                        buyMore();
                     }
-                    case 999 -> {
-                        System.out.println("you decided to skip round/player");
-                    }
+                    case 999 -> System.out.println("you decided to skip round/player");
                 }
-
             } catch (Exception e) {
                 System.out.println("Only numbers!");
                 buyDragons();
             }
         } else {
             System.out.println("You cant buy anything, sorry!");
+            if(player.getMoneyBalance() > 0){
+                game.menuChoice(player);
+            }
+        }
+    }
+
+    public void buyMore(){
+        if(dragonsYouCanBuy().size() > 0) {
+            System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
+            buyDragons();
+        }
+    }
+
+    public void printDragonsYouCanBuy(){
+        int counter = 1;
+        System.out.println("\n".repeat(20) + "Dragons you can buy:");
+        for(var dragon: dragonsYouCanBuy()){
+            System.out.println(counter + ". " + dragon + " at price " +
+                    dragonsForSale.get(dragon).getDragonPrice());
+            counter++;
         }
     }
 

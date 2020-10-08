@@ -79,7 +79,6 @@ public class Game {
     public void makeMove(){
         do {
             for (var player : players) {
-                //System.out.println(store.dragonsYouCanBuy(player));
                 menuChoice(player);
                 //checking if player has dragons.
                 if(player.getDragonsOwned().size()>0){

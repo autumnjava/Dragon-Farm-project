@@ -1,6 +1,8 @@
 package com.company;
 
 import com.company.DragonSubclasses.*;
+import com.company.FoodSubclasses.*;
+
 import java.util.*;
 
 public class FactoryStore {
@@ -10,10 +12,12 @@ public class FactoryStore {
     public LinkedHashMap<String, Food> foodForSale;
 
     public FactoryStore(Game game, Player player){
-        System.out.println("Welcome to the store, " + player.getName());
+        System.out.println("Welcome to the MagicStore, " + player.getName());
+        System.out.println("MagicStore - we never run out of stuff (C).");
         this.game = game;
         this.player = player;
         createDragons();
+        createFood();
     }
 
     private void createDragons(){
@@ -23,6 +27,14 @@ public class FactoryStore {
         dragonsForSale.put("Smaug", new Smaug());
         dragonsForSale.put("Toothless", new Toothless());
         dragonsForSale.put("Viserion", new Viserion());
+    }
+
+    private void createFood(){
+        foodForSale = new LinkedHashMap<>();
+        foodForSale.put("Grass", new Grass());
+        foodForSale.put("Fish", new Fish());
+        foodForSale.put("Meat", new Meat());
+        foodForSale.put("Metal", new Metal());
     }
 
     public ArrayList<String> dragonsYouCanBuy(){

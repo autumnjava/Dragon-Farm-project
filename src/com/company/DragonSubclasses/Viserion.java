@@ -10,7 +10,7 @@ public class Viserion extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
-        foodDragonCanEat = addFood("metal", "meat");
+        foodDragonCanEat = addFood("fish", "meat", "grass");
     }
     public Viserion(String name, String gender, Player owner){
         super(name, gender, owner);
@@ -18,7 +18,7 @@ public class Viserion extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
-        foodDragonCanEat = addFood("metal", "meat");
+        foodDragonCanEat = addFood("fish", "meat", "grass");
     }
 
 }

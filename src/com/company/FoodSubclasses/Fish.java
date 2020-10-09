@@ -4,7 +4,7 @@ import com.company.Food;
 
 public class Fish extends Food {
     public Fish(){
-        super("fish", 200, 0);
+        super("fish", 200, 1);
     }
 
     public Fish(int weight){

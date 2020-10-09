@@ -79,18 +79,9 @@ public class Game {
     public void makeMove(){
         do {
             for (var player : players) {
+                player.decreaseHealthOfDragon();
+                player.removeSickDragonIfFound();
                 menuChoice(player);
-                //checking if player has dragons.
-                if(player.getDragonsOwned().size()>0){
-                    for(var dragon: player.getDragonsOwned()){
-                        dragon.decreaseHealth();
-                        if(dragon.getHealthPercent() <= 0 && player.getDragonsOwned().size() > 0){
-                            System.out.println("Dragon died. removing dragon from list.");
-                            player.getDragonsOwned().remove(dragon);
-                            menuChoice(player);
-                        }
-                    }
-                }
             }
             roundsCounter++;
         } while (roundsCounter <= roundsInput);

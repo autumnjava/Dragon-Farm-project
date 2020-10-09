@@ -6,7 +6,7 @@ public class Player {
     private Game game;
     private String name;
     private int moneyBalance = 10000; //start summa
-    private ArrayList<Dragon> dragonsOwned;
+    protected ArrayList<Dragon> dragonsOwned;
     private ArrayList<Food> foodOwned;
 
     public Player(String name){
@@ -36,16 +36,42 @@ public class Player {
     }
 
 
-    public void addDragonToList(Dragon dragon, Player player){
-        if(dragon != null){
-            this.dragonsOwned.add(dragon);
-        } else
-            game.menuChoice(player);
+    public Dragon findSickDragon(){
+        Dragon sickDragon = null;
+        if(dragonsOwned.size() > 0){
+            for(var dragon: dragonsOwned){
+                if(dragon.healthPercent<=0){
+                    sickDragon = dragon;
+                    System.out.println("Dragon " + dragon.name + " is sick.");
+                }
+            }
+        }
+ return sickDragon;
+    }
+
+    public void removeSickDragonIfFound(){
+        findSickDragon();
+        if(findSickDragon() != null && dragonsOwned.size() > 0){
+            dragonsOwned.remove(findSickDragon());
+        }
+    }
+
+    public void decreaseHealthOfDragon() {
+        if (dragonsOwned.size() > 0) {
+            for (var dragon : dragonsOwned) {
+                var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
+                dragon.healthPercent -= randomNr;
+            }
+        }
     }
 
     public void getAllDragons(){
-        for(var dragon: dragonsOwned){
-            System.out.println(dragon.getName() + " at price " + dragon.getDragonPrice() + " its health: " + dragon.getHealthPercent());
+        if(dragonsOwned.size() > 0){
+            for(var dragon: dragonsOwned){
+                System.out.println(dragon.name + " at price " + dragon.dragonPrice + " its health: " + dragon.healthPercent);
+            }
+        } else {
+            System.out.println("You dont have any dragons.");
         }
     }
 }

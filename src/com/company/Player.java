@@ -7,7 +7,7 @@ public class Player {
     private String name;
     private int moneyBalance = 10000; //start summa
     protected ArrayList<Dragon> dragonsOwned;
-    private ArrayList<Food> foodOwned;
+    protected ArrayList<Food> foodOwned;
 
     public Player(String name){
         this.name = name;
@@ -67,11 +67,25 @@ public class Player {
 
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){
+            Game.print("-".repeat(50));
             for(var dragon: dragonsOwned){
                 System.out.println(dragon.name + " at price " + dragon.dragonPrice + " its health: " + dragon.healthPercent);
+                Game.print("-".repeat(50));
             }
         } else {
-            System.out.println("You dont have any dragons.");
+            System.out.println("You don't have any dragons.");
         }
     }
+
+    public void getAllFood(){
+        if(foodOwned.size() > 0){
+            for(var food: foodOwned){
+                System.out.println(food.name + " at price " + food.price);
+            }
+        } else {
+        System.out.println("You don't have any food.");
+    }
+    }
+
+
 }

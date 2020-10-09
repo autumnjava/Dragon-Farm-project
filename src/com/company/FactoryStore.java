@@ -31,9 +31,9 @@ public class FactoryStore {
 
     private void createFood(){
         foodForSale = new LinkedHashMap<>();
-        foodForSale.put("Grass", new Grass());
-        foodForSale.put("Fish", new Fish());
-        foodForSale.put("Meat", new Meat());
+        foodForSale.put("grass", new Grass());
+        foodForSale.put("fish", new Fish());
+        foodForSale.put("meat", new Meat());
     }
 
     public ArrayList<String> dragonsYouCanBuy(){
@@ -62,10 +62,10 @@ public class FactoryStore {
             printFoodYouCanBuy();
             try{
                 System.out.println("NOTE: enter 999 to next player / next round");
-                var input = Game.prompt("Which one you want to buy? [1-"
+                var input = Game.prompt("Which food you want to buy? [1-"
                         + foodYouCanBuy().size() + "]");
                 var inputInt = Integer.parseInt(input);
-                if(inputInt>dragonsYouCanBuy().size() && inputInt != 999){
+                if(inputInt>foodYouCanBuy().size() && inputInt != 999){
                     System.out.println("No cheating!");
                     buyFood();
                 }
@@ -164,7 +164,7 @@ public class FactoryStore {
 
     public void printFoodYouCanBuy(){
         int counter = 1;
-        System.out.println("\n".repeat(20) + "Dragons you can buy:");
+        System.out.println("\n".repeat(20) + "Food you can buy:");
         for(var food: foodYouCanBuy()){
             System.out.println(counter + ". " + food + " at price " +
                     foodForSale.get(food).price);
@@ -180,7 +180,7 @@ public class FactoryStore {
     }
 
     public void buyMoreFood(){
-        if(dragonsYouCanBuy().size() > 0) {
+        if(foodYouCanBuy().size() > 0) {
             System.out.println("\n".repeat(20) + "You can buy more food if you want!");
             buyFood();
         }

@@ -21,8 +21,8 @@ public abstract class Dragon {
 
     public ArrayList<String> addFood(String... args){
         ArrayList<String> foodDragonCanEat = new ArrayList<>();
-        for(var x: args){
-            foodDragonCanEat.add(x);
+        for(var arg: args){
+            foodDragonCanEat.add(arg);
         }
         return foodDragonCanEat;
     }

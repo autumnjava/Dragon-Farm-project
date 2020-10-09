@@ -93,8 +93,8 @@ public class Game {
         print("Right now playing: " + player.getName().toUpperCase() +
                 ". Your balance is: " + player.getMoneyBalance());
         player.getAllDragons();
+        player.getAllFood();
 
-        System.out.print(player.getFoodOwned().size() > 0 ? "Food owned : " + player.getFoodOwned() + "\n" : "");
         print("-".repeat(50));
 
         System.out.println(player.getName() + ", you will now get 5 menu choices:");
@@ -112,9 +112,11 @@ public class Game {
                 //player.addDragonToList(dragon, player);
                 FactoryStore store = new FactoryStore(this, player);
                     store.buyDragons();
-
             }
-            case "b" -> print("You decided to buy food");
+            case "b" -> {
+                FactoryStore store = new FactoryStore(this, player);
+                store.buyFood();
+            }
             case "c" -> print("You decided to feed your dragons");
             case "d" -> print("You decided to pair dragons");
             case "e" -> print("You decided to sell dragons");

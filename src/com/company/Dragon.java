@@ -19,11 +19,6 @@ public abstract class Dragon {
         this.owner = owner;
     }
 
-    public int decreaseHealth() {
-        var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
-        return healthPercent -= randomNr;
-    }
-
     public ArrayList<String> addFood(String... args){
         ArrayList<String> foodDragonCanEat = new ArrayList<>();
         for(var x: args){
@@ -31,6 +26,5 @@ public abstract class Dragon {
         }
         return foodDragonCanEat;
     }
-
 
 }

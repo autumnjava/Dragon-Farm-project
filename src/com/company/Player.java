@@ -73,7 +73,9 @@ public class Player {
                 Game.print("-".repeat(50));
             }
         } else {
+            Game.print("-".repeat(50));
             System.out.println("You don't have any dragons.");
+            Game.print("-".repeat(50));
         }
     }
 

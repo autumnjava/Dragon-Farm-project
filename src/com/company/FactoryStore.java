@@ -113,27 +113,27 @@ public class FactoryStore {
                 }
                 switch(inputInt){
                     case 1-> {
-                        player.getDragonsOwned().add(new Lockheed(askName(), askGender(), player));
+                        player.dragonsOwned.add(new Lockheed(askName(), askGender(), player));
                         setBalance("Lockheed");
                         buyMore();
                     }
                     case 2 -> {
-                        player.getDragonsOwned().add(new Falkor(askName(), askGender(), player));
+                        player.dragonsOwned.add(new Falkor(askName(), askGender(), player));
                         setBalance("Falkor");
                         buyMore();
                     }
                     case 3 -> {
-                        player.getDragonsOwned().add(new Smaug(askName(), askGender(), player));
+                        player.dragonsOwned.add(new Smaug(askName(), askGender(), player));
                         setBalance("Smaug");
                         buyMore();
                     }
                     case 4 -> {
-                        player.getDragonsOwned().add(new Toothless(askName(), askGender(), player));
+                        player.dragonsOwned.add(new Toothless(askName(), askGender(), player));
                         setBalance("Toothless");
                         buyMore();
                     }
                     case 5 -> {
-                        player.getDragonsOwned().add(new Viserion(askName(), askGender(), player));
+                        player.dragonsOwned.add(new Viserion(askName(), askGender(), player));
                         setBalance("Viserion");
                         buyMore();
                     }

@@ -79,7 +79,9 @@ public class Game {
     public void makeMove(){
         do {
             for (var player : players) {
-                player.decreaseHealthOfDragon();
+                for(var dragon: player.dragonsOwned){
+                    dragon.decreaseHealthOfDragon();
+                }
                 player.removeSickDragonIfFound();
                 menuChoice(player);
             }

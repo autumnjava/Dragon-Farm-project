@@ -91,7 +91,7 @@ public class Game {
         print("\n".repeat(20) + "-".repeat(50));
         print("Current round number: " + roundsCounter);
         print("Right now playing: " + player.getName().toUpperCase() +
-                ". Your balance is: " + player.getMoneyBalance());
+                ". Your balance is: " + player.getMoneyBalance() + " kr");
         player.getAllDragons();
         player.getAllFood();
 

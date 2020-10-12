@@ -59,10 +59,11 @@ public class Player {
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){
             Game.print("-".repeat(50));
+            System.out.println("NOTE: if health drops below 0, dragon dies.");
             for(var dragon: dragonsOwned){
-                System.out.println(dragon.name + " at price " + dragon.dragonPrice + " its health: " + dragon.healthPercent);
-                Game.print("-".repeat(50));
+                System.out.println(dragon.name.toUpperCase() + " at price " + dragon.dragonPrice + " its health: " + dragon.healthPercent);
             }
+            Game.print("-".repeat(50));
         } else {
             Game.print("-".repeat(50));
             System.out.println("You don't have any dragons.");
@@ -73,7 +74,7 @@ public class Player {
     public void getAllFood(){
         if(foodOwned.size() > 0){
             for(var food: foodOwned){
-                System.out.println(food.name + " at price " + food.price);
+                System.out.println(food.name + " at price " + food.price + " kr/kg. Amount: " + food.weight + " kg");
             }
         } else {
         System.out.println("You don't have any food.");

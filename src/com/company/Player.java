@@ -26,23 +26,24 @@ public class Player {
         this.moneyBalance = moneyBalance;
     }
 
-    public Dragon findSickDragon(){
-        Dragon sickDragon = null;
+    public ArrayList<Dragon> findSickDragons(){
+        ArrayList<Dragon> sickDragons = new ArrayList<>();
         if(dragonsOwned.size() > 0){
             for(var dragon: dragonsOwned){
                 if(dragon.healthPercent<=0){
-                    sickDragon = dragon;
-                    System.out.println("Dragon " + dragon.name + " is sick.");
+                    sickDragons.add(dragon);
                 }
             }
         }
- return sickDragon;
+ return sickDragons;
     }
 
     public void removeSickDragonIfFound(){
-        findSickDragon();
-        if(findSickDragon() != null && dragonsOwned.size() > 0){
-            dragonsOwned.remove(findSickDragon());
+        if(findSickDragons().size() > 0){
+            for(var sickDragon : findSickDragons()){
+                dragonsOwned.remove(sickDragon);
+                System.out.println("Successfully removed " + sickDragon.name + " as its health dropped below 0");
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Player {
     private String name;
@@ -47,14 +48,7 @@ public class Player {
         }
     }
 
-    public void decreaseHealthOfDragon() {
-        if (dragonsOwned.size() > 0) {
-            for (var dragon : dragonsOwned) {
-                var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
-                dragon.healthPercent -= randomNr;
-            }
-        }
-    }
+
 
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){

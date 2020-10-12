@@ -21,10 +21,17 @@ public abstract class Dragon {
 
     public ArrayList<String> addFood(String... args){
         ArrayList<String> foodDragonCanEat = new ArrayList<>();
-        for(var arg: args){
-            foodDragonCanEat.add(arg);
-        }
+        foodDragonCanEat.addAll(Arrays.asList(args));
         return foodDragonCanEat;
+    }
+
+    public void decreaseHealthOfDragon() {
+        if (owner.dragonsOwned.size() > 0) {
+            for (var dragon : owner.dragonsOwned) {
+                var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
+                dragon.healthPercent -= randomNr;
+            }
+        }
     }
 
 }

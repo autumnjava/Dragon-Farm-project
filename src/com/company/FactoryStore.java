@@ -10,9 +10,10 @@ public class FactoryStore {
     private Game game;
     public LinkedHashMap<String, Dragon> dragonsForSale;
     public LinkedHashMap<String, Food> foodForSale;
+    private Scanner scanner = new Scanner(System.in);
 
     public FactoryStore(Game game, Player player){
-        System.out.println("Welcome to the MagicStore, " + player.getName());
+        System.out.println("\n".repeat(20) +"Welcome to the MagicStore, " + player.getName());
         System.out.println("MagicStore - we never run out of stuff (C).");
         this.game = game;
         this.player = player;
@@ -61,9 +62,9 @@ public class FactoryStore {
         if(foodForSale.size() > 0 && player.getMoneyBalance() > 0){
             printFoodYouCanBuy();
             try{
-                System.out.println("NOTE: enter 999 to next player / next round");
                 var input = Game.prompt("Which food you want to buy? [1-"
                         + foodYouCanBuy().size() + "]");
+                System.out.println("NOTE: enter 999 to next player / next round");
                 var inputInt = Integer.parseInt(input);
                 if(inputInt == 999){ return; /* do nothing / skip round */ }
                 if(inputInt>foodYouCanBuy().size()){
@@ -100,23 +101,17 @@ public class FactoryStore {
             }
         } else {
             System.out.println("You cant buy anything, sorry!");
-            if(player.getMoneyBalance() > 0){
+            if(player.getMoneyBalance() > 0 || player.dragonsOwned.size()>1){ //need atleast two dragons to pair them
+                System.out.println("Maybe you can pair you dragons atleast?");
                 game.menuChoice(player);
             }
         }
     }
 
-
-    //Note: enter 0 to skip round/player
-    //0
-    //You decided to skip round/player
-    //Only numbers!
-
     public int askWeight(){
         int weight = 0;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter amount of food you want to buy:");
-        System.out.println("Note: enter 0 to skip round/player");
+
+        System.out.println("Enter amount of food you want to buy:\nNote: enter 0 to skip round/player");
         String weightString = scanner.nextLine();
 
             try {
@@ -133,9 +128,9 @@ public class FactoryStore {
         if(dragonsYouCanBuy().size()>0 && player.getMoneyBalance()>0){
             printDragonsYouCanBuy();
             try{
-                System.out.println("NOTE: enter 999 to next player / next round");
                 var input = Game.prompt("Which one you want to buy? [1-"
-                        + dragonsYouCanBuy().size() + "]");
+                        + dragonsYouCanBuy().size() + "]\n" +
+                        "NOTE: enter 999 to next player / next round");
                 var inputInt = Integer.parseInt(input);
                 if(inputInt>dragonsYouCanBuy().size() && inputInt != 999){
                     System.out.println("No cheating!");
@@ -175,12 +170,50 @@ public class FactoryStore {
             }
         } else {
             System.out.println("You cant buy anything, sorry!");
-            if(player.getMoneyBalance() > 0){
-                game.menuChoice(player);
-            }
         }
     }
 
+
+    public void sellDragons(){
+        if(player.dragonsOwned.size() > 0){
+            int counter = 1;
+            System.out.println("Dragons you can sell:");
+            for(var dragon: player.dragonsOwned) {
+                System.out.println(counter + ". " + dragon.name + ". You would earn: " + dragon.currentPrice());
+                counter++;
+            }
+
+            var input = Game.prompt("Which one you want to sell? [1-"
+                        + player.dragonsOwned.size() + "]\n" +
+                    "NOTE: enter 999 to next player / next round");
+                try {
+                    var inputInt = Integer.parseInt(input);
+                    if(inputInt == 999){ return; /* do nothing / skip round */ }
+                    if(inputInt>player.dragonsOwned.size()){
+                        System.out.println("No cheating!");
+                        sellDragons();
+                    } else {
+                        Dragon sold = player.dragonsOwned.get(inputInt-1);
+                        System.out.println("Successfully removing: " + sold.name);
+                        player.dragonsOwned.remove(sold);
+                        player.setMoneyBalance(player.getMoneyBalance() + sold.currentPrice());
+                        if(player.dragonsOwned.size() > 0){
+                            System.out.println("You can sell more dragons if you want!");
+                            sellDragons();
+                        }
+                    }
+
+                }catch (Exception e) {
+                        System.out.println(e);
+                        sellDragons();
+                    }
+
+        } else {
+            System.out.println("Unfortunately you have nothing to sell.\nTry something else maybe?");
+            game.menuChoice(player);
+        }
+
+    }
 
     public void printDragonsYouCanBuy(){
         int counter = 1;
@@ -198,8 +231,9 @@ public class FactoryStore {
         System.out.println("\n".repeat(20) + "Food you can buy:");
         System.out.println("Your balance: " + player.getMoneyBalance());
         for(var food: foodYouCanBuy()){
-            System.out.println(counter + ". " + food + " at price " +
-                    foodForSale.get(food).price + " kr/kg");
+            System.out.println(counter + ". " + foodForSale.get(food).getClass().getSimpleName() + " at price " +
+                    foodForSale.get(food).price + " kr/kg" + "." +
+                    " [MAX: " + (player.getMoneyBalance()/foodForSale.get(food).price) + " kg.]");
             counter++;
         }
     }

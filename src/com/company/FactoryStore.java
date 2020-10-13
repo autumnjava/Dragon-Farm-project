@@ -65,27 +65,34 @@ public class FactoryStore {
                 var input = Game.prompt("Which food you want to buy? [1-"
                         + foodYouCanBuy().size() + "]");
                 var inputInt = Integer.parseInt(input);
-                if(inputInt>foodYouCanBuy().size() && inputInt != 999){
+                if(inputInt == 999){ return; /* do nothing / skip round */ }
+                if(inputInt>foodYouCanBuy().size()){
                     System.out.println("No cheating!");
                     buyFood();
                 }
-                switch(inputInt){
-                    case 1 -> {
-                        player.foodOwned.add(new Grass(1));
-                        setBalanceFood("grass");
+                var chosenFoodName = foodYouCanBuy().get(inputInt-1);
+                var weight = askWeight();
+
+                if(weight > 0){
+                    Food foodToAdd;
+                    switch(chosenFoodName){
+                        case "grass" -> foodToAdd = new Grass(weight);
+                        case "fish" -> foodToAdd = new Fish(weight);
+                        case "meat" -> foodToAdd = new Meat(weight);
+                        default -> throw new IllegalStateException("Unexpected value: " + chosenFoodName);
+                    }
+                    if(foodToAdd.price > player.getMoneyBalance()){
+                        System.out.println("Trying to get a loan? Not today. Try again");
+                        buyFood();
+                    }else {
+                        player.foodOwned.add(foodToAdd);
+                        player.setMoneyBalance(player.getMoneyBalance() - foodToAdd.price);
                         buyMoreFood();
                     }
-                    case 2 -> {
-                        player.foodOwned.add(new Fish(1));
-                        setBalanceFood("fish");
-                        buyMoreFood();
-                    }
-                    case 3 -> {
-                        player.foodOwned.add(new Meat(1));
-                        setBalanceFood("meat");
-                        buyMoreFood();
-                    }
-                    case 999 -> System.out.println("you decided to skip round/player");
+
+                } else {
+                    System.out.println("You decided to skip round/player");
+
                 }
             } catch (Exception e) {
                 System.out.println("Only numbers!");
@@ -97,6 +104,29 @@ public class FactoryStore {
                 game.menuChoice(player);
             }
         }
+    }
+
+
+    //Note: enter 0 to skip round/player
+    //0
+    //You decided to skip round/player
+    //Only numbers!
+
+    public int askWeight(){
+        int weight = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter amount of food you want to buy:");
+        System.out.println("Note: enter 0 to skip round/player");
+        String weightString = scanner.nextLine();
+
+            try {
+                weight = Integer.parseInt(weightString);
+
+            } catch (Exception e) {
+                System.out.println("Only numbers!");
+                return askWeight();
+            }
+        return weight;
     }
 
     public void buyDragons(){
@@ -155,6 +185,7 @@ public class FactoryStore {
     public void printDragonsYouCanBuy(){
         int counter = 1;
         System.out.println("\n".repeat(20) + "Dragons you can buy:");
+        System.out.println("Your balance: " + player.getMoneyBalance());
         for(var dragon: dragonsYouCanBuy()){
             System.out.println(counter + ". " + dragon + " at price " +
                     dragonsForSale.get(dragon).dragonPrice);
@@ -165,9 +196,10 @@ public class FactoryStore {
     public void printFoodYouCanBuy(){
         int counter = 1;
         System.out.println("\n".repeat(20) + "Food you can buy:");
+        System.out.println("Your balance: " + player.getMoneyBalance());
         for(var food: foodYouCanBuy()){
             System.out.println(counter + ". " + food + " at price " +
-                    foodForSale.get(food).price);
+                    foodForSale.get(food).price + " kr/kg");
             counter++;
         }
     }
@@ -210,9 +242,5 @@ public class FactoryStore {
 
     public void setBalance(String dragon){
         player.setMoneyBalance(player.getMoneyBalance() - dragonsForSale.get(dragon).dragonPrice);
-    }
-
-    public void setBalanceFood(String food){
-        player.setMoneyBalance(player.getMoneyBalance() - foodForSale.get(food).price);
     }
 }

@@ -27,11 +27,13 @@ public abstract class Dragon {
 
     public void decreaseHealthOfDragon() {
         if (owner.dragonsOwned.size() > 0) {
-            for (var dragon : owner.dragonsOwned) {
                 var randomNr = (int) ((Math.random() * (31 - 10)) + 10);
-                dragon.healthPercent -= randomNr;
-            }
+                healthPercent -= randomNr;
         }
+    }
+
+    public int currentPrice(){
+        return dragonPrice * healthPercent / 100;
     }
 
 }

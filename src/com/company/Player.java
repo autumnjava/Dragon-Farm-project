@@ -47,8 +47,6 @@ public class Player {
         }
     }
 
-
-
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){
             Game.print("-".repeat(50));
@@ -68,7 +66,7 @@ public class Player {
     public void getAllFood(){
         if(foodOwned.size() > 0){
             for(var food: foodOwned){
-                System.out.println(food.name + " at price " + food.price/food.weight + " kr/kg. Amount: " + food.weight + " kg. SUM: " + food.price);
+                System.out.println(food.getClass().getSimpleName() + " at price " + food.price/food.weight + " kr/kg. Amount: " + food.weight + " kg. SUM: " + food.price);
             }
         } else {
         System.out.println("You don't have any food.");

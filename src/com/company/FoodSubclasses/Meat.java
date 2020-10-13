@@ -8,6 +8,6 @@ public class Meat extends Food {
     }
 
     public Meat(int weight){
-        super("meat", 300, weight);
+        super("meat", 300*weight, weight);
     }
 }

@@ -8,6 +8,6 @@ public class Grass extends Food {
     }
 
     public Grass(int weight){
-        super("grass", 100, weight);
+        super("grass", 100*weight, weight);
     }
 }

@@ -79,11 +79,12 @@ public class Game {
     public void makeMove(){
         do {
             for (var player : players) {
+                menuChoice(player);
                 for(var dragon: player.dragonsOwned){
                     dragon.decreaseHealthOfDragon();
                 }
                 player.removeSickDragonIfFound();
-                menuChoice(player);
+
             }
             roundsCounter++;
         } while (roundsCounter <= roundsInput);
@@ -119,14 +120,19 @@ public class Game {
                 FactoryStore store = new FactoryStore(this, player);
                 store.buyFood();
             }
-            case "c" -> print("You decided to feed your dragons");
+            case "c" -> {
+                print("You decided to feed your dragons");
+                player.getAllDragons();
+            }
             case "d" -> print("You decided to pair dragons");
-            case "e" -> print("You decided to sell dragons");
+            case "e" -> {
+                FactoryStore store = new FactoryStore(this, player);
+                store.sellDragons();
+            }
             case "x" -> print("Better luck next time!");
             default -> {
                 print("Wrong input! Try again!\n");
                 menuChoice(player);
-                //how to start method again without changing player?
             }
         }
     }

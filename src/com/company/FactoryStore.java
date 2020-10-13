@@ -109,7 +109,7 @@ public class FactoryStore {
     }
 
     public int askWeight(){
-        int weight = 0;
+        int weight;
 
         System.out.println("Enter amount of food you want to buy:\nNote: enter 0 to skip round/player");
         String weightString = scanner.nextLine();
@@ -204,7 +204,7 @@ public class FactoryStore {
                     }
 
                 }catch (Exception e) {
-                        System.out.println(e);
+                        System.out.println("Only numbers!");
                         sellDragons();
                     }
 

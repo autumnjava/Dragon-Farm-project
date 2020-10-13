@@ -1,7 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class Player {
     private String name;
@@ -55,7 +54,8 @@ public class Player {
             Game.print("-".repeat(50));
             System.out.println("NOTE: if health drops below 0, dragon dies.");
             for(var dragon: dragonsOwned){
-                System.out.println(dragon.name.toUpperCase() + " at price " + dragon.dragonPrice + " its health: " + dragon.healthPercent);
+                System.out.println(dragon.name.toUpperCase() + " initial price " + dragon.dragonPrice + " its health: " + dragon.healthPercent +
+                        " current price: " + dragon.currentPrice() + " kr.");
             }
             Game.print("-".repeat(50));
         } else {
@@ -68,7 +68,7 @@ public class Player {
     public void getAllFood(){
         if(foodOwned.size() > 0){
             for(var food: foodOwned){
-                System.out.println(food.name + " at price " + food.price + " kr/kg. Amount: " + food.weight + " kg");
+                System.out.println(food.name + " at price " + food.price/food.weight + " kr/kg. Amount: " + food.weight + " kg. SUM: " + food.price);
             }
         } else {
         System.out.println("You don't have any food.");

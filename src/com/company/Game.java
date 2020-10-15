@@ -158,4 +158,17 @@ public class Game {
         var answer = scanner.nextLine().trim(); // trim removes spaces at start & end
         return answer.equals("") && _default.length > 0 ? _default[0] : answer;
     }
+
+    static public int promptInt(String question, int min, int max){
+        var num = min - 1;
+        try {
+            num = Integer.parseInt(prompt(question));
+        }
+        catch(Exception ignore){}
+        // if illegal choice show the prompt again (recursion)
+        // otherwise return the choice
+        return num < min || num > max ?
+                promptInt(question, min, max) : num;
+    }
+
     }

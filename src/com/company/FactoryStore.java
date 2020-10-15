@@ -86,7 +86,6 @@ public class FactoryStore {
                         System.out.println("Trying to get a loan? Not today. Try again");
                         buyFood();
                     } else {
-
                         var add = true;
                         for(int i = player.foodOwned.size()-1; i>=0; i--){
                             if(player.foodOwned.get(i).name.equals(foodToAdd.name)){
@@ -98,7 +97,6 @@ public class FactoryStore {
                         if(add){
                             player.foodOwned.add(foodToAdd);
                         }
-
 
                         player.setMoneyBalance(player.getMoneyBalance() - foodToAdd.finalPrice);
                         buyMoreFood();
@@ -142,38 +140,27 @@ public class FactoryStore {
                         + dragonsYouCanBuy().size() + "]\n" +
                         "NOTE: enter 999 to next player / next round");
                 var inputInt = Integer.parseInt(input);
-                if(inputInt>dragonsYouCanBuy().size() && inputInt != 999){
+                if(inputInt == 999){ return; /* do nothing / skip round */ }
+                if(inputInt>dragonsYouCanBuy().size()){
                     System.out.println("No cheating!");
                     buyDragons();
                 }
-                switch(inputInt){
-                    case 1-> {
-                        player.dragonsOwned.add(new Lockheed(askName(), askGender(), player));
-                        setBalance("Lockheed");
-                        buyMore();
-                    }
-                    case 2 -> {
-                        player.dragonsOwned.add(new Falkor(askName(), askGender(), player));
-                        setBalance("Falkor");
-                        buyMore();
-                    }
-                    case 3 -> {
-                        player.dragonsOwned.add(new Smaug(askName(), askGender(), player));
-                        setBalance("Smaug");
-                        buyMore();
-                    }
-                    case 4 -> {
-                        player.dragonsOwned.add(new Toothless(askName(), askGender(), player));
-                        setBalance("Toothless");
-                        buyMore();
-                    }
-                    case 5 -> {
-                        player.dragonsOwned.add(new Viserion(askName(), askGender(), player));
-                        setBalance("Viserion");
-                        buyMore();
-                    }
-                    case 999 -> System.out.println("you decided to skip round/player");
+                var chosenDragonName = dragonsYouCanBuy().get(inputInt-1);
+                var name = askName();
+                var gender = askGender();
+                Dragon dragonToAdd;
+                switch(chosenDragonName){
+                    case "Lockheed"-> dragonToAdd = new Lockheed(name, gender, player);
+                    case "Falkor" -> dragonToAdd = new Falkor(name, gender, player);
+                    case "Smaug" -> dragonToAdd = new Smaug(name, gender, player);
+                    case "Toothless" -> dragonToAdd = new Toothless(name, gender, player);
+                    case "Viserion" -> dragonToAdd = new Viserion(name, gender, player);
+                    default -> throw new IllegalStateException("Unexpected value: " + chosenDragonName);
                 }
+                player.dragonsOwned.add(dragonToAdd);
+                player.setMoneyBalance(player.getMoneyBalance()-dragonToAdd.dragonPrice);
+                buyMoreDragons();
+
             } catch (Exception e) {
                 System.out.println("Only numbers!");
                 buyDragons();
@@ -248,7 +235,7 @@ public class FactoryStore {
         }
     }
 
-    public void buyMore(){
+    public void buyMoreDragons(){
         if(dragonsYouCanBuy().size() > 0) {
             System.out.println("\n".repeat(20) + "You can buy more dragons if you want!");
             buyDragons();

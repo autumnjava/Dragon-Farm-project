@@ -4,12 +4,14 @@ import java.util.*;
 
 public class Player {
     private String name;
+    private Game game;
     private int moneyBalance = 10000; //start summa
     protected ArrayList<Dragon> dragonsOwned;
     protected ArrayList<Food> foodOwned;
 
-    public Player(String name){
+    public Player(String name, Game game){
         this.name = name;
+        this.game = game;
         this.dragonsOwned = new ArrayList<Dragon>();
         this.foodOwned = new ArrayList<Food>();
     }
@@ -71,6 +73,16 @@ public class Player {
         } else {
         System.out.println("You don't have any food.");
     }
+    }
+
+    public void feedDragons(){
+        if(dragonsOwned.size()>0){
+            System.out.println("You decided to feed your dragons! They are hungry!");
+
+        } else {
+            System.out.println("You have no dragons to feed. Try something else?");
+            game.menuChoice(this);
+        }
     }
 
 

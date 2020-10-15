@@ -4,10 +4,10 @@ import com.company.Food;
 
 public class Grass extends Food {
     public Grass(){
-        super("grass", 100, 1);
+        super("grass", 100, 1, 100);
     }
 
     public Grass(int weight){
-        super("grass", 100*weight, weight);
+        super("grass", 100, weight, 100*weight);
     }
 }

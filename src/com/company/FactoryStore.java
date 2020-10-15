@@ -265,8 +265,4 @@ public class FactoryStore {
             return askGender();
         }
     }
-
-    public void setBalance(String dragon){
-        player.setMoneyBalance(player.getMoneyBalance() - dragonsForSale.get(dragon).dragonPrice);
-    }
 }

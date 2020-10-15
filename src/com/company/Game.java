@@ -48,7 +48,7 @@ public class Game {
                 System.out.println("Creating player(s)");
                 for (int i = 0; i < usersInput; i++) {
                     System.out.println(names[i]);
-                    players.add(new Player(names[i]));
+                    players.add(new Player(names[i], this));
                 }
             }
         } catch (Exception e) {
@@ -111,19 +111,14 @@ public class Game {
         var input = scanner.nextLine();
         switch (input) {
             case "a" -> {
-                //var dragon = FactoryStore.askAndCreateDragon(player);
-                //player.addDragonToList(dragon, player);
                 FactoryStore store = new FactoryStore(this, player);
-                    store.buyDragons();
+                store.buyDragons();
             }
             case "b" -> {
                 FactoryStore store = new FactoryStore(this, player);
                 store.buyFood();
             }
-            case "c" -> {
-                print("You decided to feed your dragons");
-                player.getAllDragons();
-            }
+            case "c" -> player.feedDragons();
             case "d" -> print("You decided to pair dragons");
             case "e" -> {
                 FactoryStore store = new FactoryStore(this, player);

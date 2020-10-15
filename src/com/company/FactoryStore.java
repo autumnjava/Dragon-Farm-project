@@ -63,8 +63,8 @@ public class FactoryStore {
             printFoodYouCanBuy();
             try{
                 var input = Game.prompt("Which food you want to buy? [1-"
-                        + foodYouCanBuy().size() + "]");
-                System.out.println("NOTE: enter 999 to next player / next round");
+                        + foodYouCanBuy().size() + "]\n" +
+                        "NOTE: enter 999 to next player / next round");
                 var inputInt = Integer.parseInt(input);
                 if(inputInt == 999){ return; /* do nothing / skip round */ }
                 if(inputInt>foodYouCanBuy().size()){
@@ -74,29 +74,39 @@ public class FactoryStore {
                 var chosenFoodName = foodYouCanBuy().get(inputInt-1);
                 var weight = askWeight();
 
-                if(weight > 0){
-                    Food foodToAdd;
-                    switch(chosenFoodName){
+                Food foodToAdd;
+                if(weight > 0) {
+                    switch (chosenFoodName) {
                         case "grass" -> foodToAdd = new Grass(weight);
-                        case "fish" -> foodToAdd = new Fish(weight);
-                        case "meat" -> foodToAdd = new Meat(weight);
+                        case "fish" ->  foodToAdd = new Fish(weight);
+                        case "meat" ->  foodToAdd = new Meat(weight);
                         default -> throw new IllegalStateException("Unexpected value: " + chosenFoodName);
                     }
-                    if(foodToAdd.price > player.getMoneyBalance()){
+                    if (foodToAdd.price > player.getMoneyBalance()) {
                         System.out.println("Trying to get a loan? Not today. Try again");
                         buyFood();
-                    }else {
-                        player.foodOwned.add(foodToAdd);
-                        player.setMoneyBalance(player.getMoneyBalance() - foodToAdd.price);
+                    } else {
+
+                        var add = true;
+                        for(int i = player.foodOwned.size()-1; i>=0; i--){
+                            if(player.foodOwned.get(i).name.equals(foodToAdd.name)){
+                                System.out.println("BINGO! Already exists");
+                                player.foodOwned.get(i).setWeight(player.foodOwned.get(i).weight + foodToAdd.weight);
+                                add = false;
+                            }
+                        }
+                        if(add){
+                            player.foodOwned.add(foodToAdd);
+                        }
+
+
+                        player.setMoneyBalance(player.getMoneyBalance() - foodToAdd.finalPrice);
                         buyMoreFood();
                     }
-
-                } else {
-                    System.out.println("You decided to skip round/player");
-
                 }
+                else { System.out.println("You decided to skip round/player"); }
             } catch (Exception e) {
-                System.out.println("Only numbers!");
+                System.out.println(e);
                 buyFood();
             }
         } else {
@@ -247,7 +257,7 @@ public class FactoryStore {
 
     public void buyMoreFood(){
         if(foodYouCanBuy().size() > 0) {
-            System.out.println("\n".repeat(20) + "You can buy more food if you want!");
+            System.out.println("You can buy more food if you want!");
             buyFood();
         }
     }
@@ -268,11 +278,6 @@ public class FactoryStore {
             return askGender();
         }
     }
-
-    /**
-     * This is a method that updates players balance
-     * @param dragon To get price of dragon
-     */
 
     public void setBalance(String dragon){
         player.setMoneyBalance(player.getMoneyBalance() - dragonsForSale.get(dragon).dragonPrice);

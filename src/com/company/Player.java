@@ -5,7 +5,7 @@ import java.util.*;
 public class Player {
     private String name;
     private Game game;
-    private int moneyBalance = 20000; //start summa
+    private int moneyBalance = 20000; //start amount of cash
     protected ArrayList<Dragon> dragonsOwned;
     protected ArrayList<Food> foodOwned;
 
@@ -28,23 +28,14 @@ public class Player {
         this.moneyBalance = moneyBalance;
     }
 
-    public ArrayList<Dragon> findSickDragons(){
-        ArrayList<Dragon> sickDragons = new ArrayList<>();
+    public void findAndRemoveSickDragons(){
         if(dragonsOwned.size() > 0){
-            for(var dragon: dragonsOwned){
-                if(dragon.healthPercent<=0){
-                    sickDragons.add(dragon);
+            for(int i = dragonsOwned.size()-1; i>= 0; i--){
+                if(dragonsOwned.get(i).healthPercent<=0){
+                    System.out.println("Removing " + dragonsOwned.get(i).name +
+                            " as its health dropped below 0");
+                    dragonsOwned.remove(dragonsOwned.get(i));
                 }
-            }
-        }
- return sickDragons;
-    }
-
-    public void removeSickDragonIfFound(){
-        if(findSickDragons().size() > 0){
-            for(var sickDragon : findSickDragons()){
-                dragonsOwned.remove(sickDragon);
-                System.out.println("Successfully removed " + sickDragon.name + " as its health dropped below 0");
             }
         }
     }
@@ -162,6 +153,5 @@ public class Player {
             game.menuChoice(this);
         }
     }
-
 
 }

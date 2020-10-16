@@ -81,7 +81,10 @@ public class Game {
             for (var player : players) {
                 menuChoice(player);
                 for(var dragon: player.dragonsOwned){
-                    dragon.decreaseHealthOfDragon();
+                    if(!dragon.beenFed){
+                        dragon.decreaseHealthOfDragon();
+                    }
+
                 }
                 player.removeSickDragonIfFound();
 

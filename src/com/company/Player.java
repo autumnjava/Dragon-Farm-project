@@ -116,7 +116,7 @@ public class Player {
                             if(owned.name.equals(food)){
                                 ++c;
                                 foodMap.put(c, owned);
-                                System.out.println(c + ". " + owned.name + " [" + owned.weight + " kg]");
+                                System.out.println(c + ". " + owned.name + " [You owe: " + owned.weight + " kg]");
                             }
                         }
                     }
@@ -142,6 +142,7 @@ public class Player {
                     else{
                         chosenDragon.setHealthPercent(chosenDragon.healthPercent + 10*weight);
                         foodMap.get(input).setWeight(chosen.weight-weight);
+                        chosenDragon.beenFed = true;
                     }
 
                     for(int i = foodOwned.size()-1; i >= 0; i--){

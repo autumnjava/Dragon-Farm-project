@@ -17,63 +17,20 @@ public class Game {
         // start the game
         names = newNames.length < 4 ? names : newNames;
 
-        howManyUsers(); //ask user how many users is going to play, enter their names
-        howManyRounds(); //ask user how many rounds they want to play
+        int usersInput = Game.promptInt("\n\nEnter how many users are going to play this game [1-4]", 1, 4);
+        //creating players
+        for (int i = 0; i < usersInput; i++) {
+            System.out.println(names[i]);
+            players.add(new Player(names[i], this));
+        }
+        roundsInput = Game.promptInt("How many rounds do you want to play? [5-30]", 5, 30); //ask user how many rounds they want to play
         makeMove();
 
 
-        System.out.println("We have now played " + roundsInput + " rounds. Which was maximum for this game.");
+        System.out.println("\n".repeat(5) + "We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
 
-    }
-
-    public void howManyUsers() {
-        String error = "ONLY DIGITS [1-4]! Try again";
-        print("\n\nEnter how many users are going to play this game [1-4]");
-        try {
-            var userInput = scanner.nextLine();
-            int usersInput = Integer.parseInt(userInput);
-            if (usersInput < 1 || usersInput > 4) {
-                System.out.println(error);
-                howManyUsers();
-            } else {
-                print("You have entered " + usersInput);
-
-                for (var i = 0; i < usersInput; i++) {
-                    names[i] = prompt("Player " + (i + 1) + " name"
-                            + " (space + enter for \"" + names[i] + "\"):", names[i]);
-                }
-                //creating players
-                System.out.println("Creating player(s)");
-                for (int i = 0; i < usersInput; i++) {
-                    System.out.println(names[i]);
-                    players.add(new Player(names[i], this));
-                }
-            }
-        } catch (Exception e) {
-            print(error);
-            howManyUsers();
-        }
-    }
-
-    private void howManyRounds() {
-        String error = "ONLY DIGITS [5-30]! Try again";
-        try {
-            print("Enter how many rounds you want to play! [5-30].");
-            var userInput = scanner.nextLine();
-            roundsInput = Integer.parseInt(userInput);
-            if (roundsInput < 5 || roundsInput > 30) {
-                System.out.println(error);
-                howManyRounds();
-            } else {
-                print("You have entered " + roundsInput);
-            }
-
-        } catch (Exception e) {
-            System.out.println(error);
-            howManyRounds();
-        }
     }
 
     public void makeMove(){
@@ -95,7 +52,7 @@ public class Game {
 
     public void menuChoice(Player player) {
         print("\n".repeat(20) + "-".repeat(50));
-        print("Current round number: " + roundsCounter);
+        print("Current round number: " + roundsCounter + "/" + roundsInput);
         print("Right now playing: " + player.getName().toUpperCase() +
                 ". Your balance is: " + player.getMoneyBalance() + " kr");
         player.getAllDragons();
@@ -138,14 +95,14 @@ public class Game {
 
     public void playAgain(){
         var input = (prompt("Play again? (y/n)?"));
-                switch(input){
+        switch(input){
             case "y" -> new Game();
             case "n" -> System.exit(0);
             default -> {
                 print("Wrong input! Try again");
                 playAgain();
             }
-                }
+        }
     }
     
 
@@ -173,5 +130,4 @@ public class Game {
         return num < min || num > max ?
                 promptInt(question, min, max) : num;
     }
-
     }

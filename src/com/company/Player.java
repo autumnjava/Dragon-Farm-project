@@ -76,25 +76,20 @@ public class Player {
     }
 
     public void feedDragons(){
-        if(dragonsOwned.size()>0 ){ //&& foodOwned.size()>0
-            System.out.println("\n".repeat(5) + "You decided to feed your dragons! They are hungry!");
+        if(dragonsOwned.size()>0 && foodOwned.size()>0){
+            System.out.println("\n".repeat(20) + "You decided to feed your dragons! They are hungry!\n\nYour dragons:");
             int counter = 1;
+            Game.print("-".repeat(50));
             for(var dragon: dragonsOwned) {
                 System.out.println(counter + ". " + dragon.name + ". Its health: " + dragon.healthPercent
                 + ". It can eat: " + dragon.foodDragonCanEat);
                 counter++;
             }
-            System.out.println("Choose a dragon to feed!");
-            var inputDragon = Game.prompt("Which one you want to feed? [1-"
-                    + dragonsOwned.size() + "]\n" +
-                    "NOTE: enter 999 to next player / next round");
-            try {
-                var inputInt = Integer.parseInt(inputDragon);
-                if (inputInt == 999) { return; /* do nothing / skip round */ }
-                if(inputInt>dragonsOwned.size()){
-                    System.out.println("No cheating!" + "\n".repeat(5));
-                    feedDragons();
-                }
+            Game.print("-".repeat(50));
+            var inputInt = Game.promptInt("\n\nChoose a dragon to feed! [1-" + dragonsOwned.size() + "]" +
+                    "\nNOTE: enter 0 to next player / next round", 0, dragonsOwned.size());
+
+                if (inputInt == 0) { return; /* do nothing / skip round */ }
                 var chosenDragon = dragonsOwned.get(inputInt-1);
                 switch (chosenDragon.getClass().getSimpleName()){
                     case "Lockheed", "Falkor", "Smaug", "Toothless", "Viserion" -> System.out.println(
@@ -106,14 +101,14 @@ public class Player {
                 var canEat = false;
                 for(var eatable: chosenDragon.foodDragonCanEat){
                     for(var ownable: foodOwned){
-                        if (ownable.name.toLowerCase().equals(eatable.toLowerCase())) {
+                        if (ownable.name.equals(eatable)) {
                             canEat = true;
                             break;
                         }
                     }
                 }
                 if(canEat){
-                    System.out.println("\n".repeat(5) + "You have food that dragon can eat!");
+                    System.out.println("\n".repeat(20) + "You have food that dragon can eat!\n");
                     int c = 0;
                     var foodMap = new HashMap<Integer, Food>();
                     for(var food: chosenDragon.foodDragonCanEat){
@@ -128,10 +123,11 @@ public class Player {
 
                     var input = Game.promptInt("What type of food do you want to feed the dragon?", 1, c);
                     var chosen = foodMap.get(input);
-                    System.out.println("You entered " + input + " which is:" + chosen.name + ", I owe: " + chosen.weight);
+                    int maxKg = (100 - chosenDragon.healthPercent) / 10;
+                    System.out.println("\n\nYou chose " +  chosen.name + ", I owe: " + chosen.weight + " kg \n" +
+                            "Dragon " + chosenDragon.name + " can eat max: " + maxKg + " kg of " + chosen.name + "\n\n");
 
                     var weight = Game.promptInt("Enter amount: ", 1, chosen.weight);
-                    int maxKg = (100 - chosenDragon.healthPercent) / 10;
                     var hungry = true;
 
                     if(weight > maxKg) {
@@ -139,16 +135,14 @@ public class Player {
                     }
 
                     if(!hungry){
-                        System.out.println("Dragon is not that hungry!");
-                        System.out.println(chosenDragon.name + " can max eat: " + maxKg + " kg of " + chosen.getClass().getSimpleName());
+                        System.out.println("Dragon is not that hungry!\n");
+                        System.out.println(chosenDragon.name + " can max eat: " + maxKg + " kg of " + chosen.name);
                         feedDragons();
                     }
                     else{
                         chosenDragon.setHealthPercent(chosenDragon.healthPercent + 10*weight);
                         foodMap.get(input).setWeight(chosen.weight-weight);
                     }
-
-
 
                     for(int i = foodOwned.size()-1; i >= 0; i--){
                         if(foodOwned.get(i).weight == 0){
@@ -157,18 +151,10 @@ public class Player {
                         }
                     }
 
-
                 } else {
-                    System.out.println("You dont have food that dragon can eat!");
+                    System.out.println("You don't have food that dragon can eat! Try something else?");
+                    game.menuChoice(this);
                 }
-
-
-
-            } catch (Exception e) {
-                System.out.println("\n".repeat(5));
-                System.out.println(e);
-                feedDragons();
-            }
 
         } else {
             System.out.println("You have no dragons/no food. Try something else?");

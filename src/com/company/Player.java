@@ -129,8 +129,26 @@ public class Player {
                     var input = Game.promptInt("What type of food do you want to feed the dragon?", 1, c);
                     var chosen = foodMap.get(input);
                     System.out.println("You entered " + input + " which is:" + chosen.name + ", I owe: " + chosen.weight);
+
                     var weight = Game.promptInt("Enter amount: ", 1, chosen.weight);
-                    foodMap.get(input).setWeight(chosen.weight-weight);
+                    int maxKg = (100 - chosenDragon.healthPercent) / 10;
+                    var hungry = true;
+
+                    if(weight > maxKg) {
+                        hungry = false;
+                    }
+
+                    if(!hungry){
+                        System.out.println("Dragon is not that hungry!");
+                        System.out.println(chosenDragon.name + " can max eat: " + maxKg + " kg of " + chosen.getClass().getSimpleName());
+                        feedDragons();
+                    }
+                    else{
+                        chosenDragon.setHealthPercent(chosenDragon.healthPercent + 10*weight);
+                        foodMap.get(input).setWeight(chosen.weight-weight);
+                    }
+
+
 
                     for(int i = foodOwned.size()-1; i >= 0; i--){
                         if(foodOwned.get(i).weight == 0){

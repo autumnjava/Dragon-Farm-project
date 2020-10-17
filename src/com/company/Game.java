@@ -18,9 +18,14 @@ public class Game {
         names = newNames.length < 4 ? names : newNames;
 
         int usersInput = Game.promptInt("\n\nEnter how many users are going to play this game [1-4]", 1, 4);
+        for(var i = 0; i < usersInput; i++){
+            names[i] = prompt("Player " + (i + 1) + " enter your name: "
+                    + " (space + enter for \"" + names[i] + "\"):", names[i]);
+        }
+
         //creating players
         for (int i = 0; i < usersInput; i++) {
-            System.out.println(names[i]);
+            System.out.println("Creating player: " + names[i]);
             players.add(new Player(names[i], this));
         }
         roundsInput = Game.promptInt("How many rounds do you want to play? [5-30]", 5, 30); //ask user how many rounds they want to play

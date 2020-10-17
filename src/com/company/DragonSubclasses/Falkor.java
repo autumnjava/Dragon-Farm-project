@@ -11,6 +11,7 @@ public class Falkor extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
+        litterSize = 3;
         foodDragonCanEat = addFood("fish");
     }
     public Falkor(String name, String gender, Player owner){
@@ -19,6 +20,7 @@ public class Falkor extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
+        litterSize = 3;
         foodDragonCanEat = addFood("fish");
     }
 }

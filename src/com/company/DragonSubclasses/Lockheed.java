@@ -12,6 +12,7 @@ public class Lockheed extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
+        litterSize = 3;
         foodDragonCanEat = addFood("meat");
     }
     public Lockheed(String name, String gender, Player owner){
@@ -20,6 +21,7 @@ public class Lockheed extends Dragon {
         healthPercent = 100;
         age = 0;
         maxAge = 5;
+        litterSize = 3;
         foodDragonCanEat = addFood("meat");
     }
 

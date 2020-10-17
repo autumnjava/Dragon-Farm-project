@@ -11,6 +11,7 @@ public abstract class Dragon {
     protected int dragonPrice;
     protected int age;
     protected int maxAge;
+    protected int litterSize;
     protected ArrayList<String> foodDragonCanEat;
     protected boolean beenFed = false;
     protected boolean died = false;

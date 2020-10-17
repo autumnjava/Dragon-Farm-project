@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.DragonSubclasses.*;
+
 import java.util.*;
 
 public class Player {
@@ -143,24 +145,72 @@ public class Player {
                 }
 
             } else {
-                System.out.println("You don't have food that dragon can eat! Try something else?");
+                System.out.println("You don't have food that dragon can eat! Try something else.");
                 game.menuChoice(this);
             }
 
         } else {
-            System.out.println("You have no dragons/no food. Try something else?");
+            System.out.println("You have no dragons/no food. Try something else.");
             game.menuChoice(this);
         }
     }
 
 
     public void mateDragons(){
-/*
-Försöka få ett par djur att para sig, då skapas i 50% av fallen nya djur man äger
-(om djuren är av samma slag och olika kön, olka slags djur kan inte para sig).
-Om parningen lyckas kan spelaren döpa det/de nya djuret/djuren
-(olika slags djur kan ha olika många ungar/parning).
-Könet på djuren som skapas vid parning slumpas (50% hona, 50% hane).*/
+        if(dragonsOwned.size()>=2){
+            System.out.println("\n".repeat(20) + "Your dragons: ");
+            System.out.println("-".repeat(50));
+            int counter = 1;
+            for(var dragon: dragonsOwned){
+                System.out.println(counter++ + ". Name: " + dragon.name + ". Gender: " + dragon.gender + ""
+                + ". Dragon class: " + dragon.getClass().getSimpleName().toLowerCase());
+            }
+            System.out.println("-".repeat(50));
+            var input1 = Game.promptInt("\n".repeat(2) + "Chose one dragon to mate!\n" +
+                    "NOTE: you can only mate same types of dragons!\n" +
+                    "[enter 0 to next player / next round]", 0, dragonsOwned.size());
 
+            if (input1 == 0) { return; /* do nothing / skip round */ }
+            var dragon1 = dragonsOwned.get(input1-1);
+
+            var input2 = Game.promptInt("\n".repeat(2) + "Chose another dragon to mate!\n" +
+                    "NOTE: You can't mate two dragons of the same gender!\n" +
+                    "[enter 0 to next player / next round]", 0, dragonsOwned.size());
+            var dragon2 = dragonsOwned.get(input2-1);
+            if (input2 == 0) { return; /* do nothing / skip round */ }
+
+            if(dragon1==dragon2) {
+                System.out.println("No cheating! You are trying to mate the same dragon!");
+                mateDragons();
+            } else if(dragon1.gender.equals(dragon2.gender) && dragon1.getClass() == dragon2.getClass()){
+                System.out.println("No homo in this game!");
+                mateDragons();
+            } else if(dragon1.getClass()!=dragon2.getClass()){
+                System.out.println("It has to be two dragons of the same type!");
+                mateDragons();
+            } else {
+                System.out.println("Trying to pair dragons!\nRemember its 50-50 chance to get baby dragons");
+                var random = (int) (Math.random() * (2));
+                if(random==0){
+                    System.out.println("Better luck next time!");
+                } else {
+                    System.out.println("Creating new baby dragons!");
+                    var dragonClass = dragon1.getClass().getSimpleName();
+                    var babyName = Game.prompt("Enter a name of a baby dragon:");
+                    var babyGender = (int) (Math.random() * (2)) == 0 ? "male" : "female";
+                    switch(dragonClass){
+                        case "Lockheed" -> dragonsOwned.add(new Lockheed(babyName, babyGender, this));
+                        case "Falkor" -> dragonsOwned.add(new Falkor(babyName, babyGender, this));
+                        case "Smaug" -> dragonsOwned.add(new Smaug(babyName, babyGender, this));
+                        case "Toothless" -> dragonsOwned.add(new Toothless(babyName, babyGender, this));
+                        case "Viserion" -> dragonsOwned.add(new Viserion(babyName, babyGender, this));
+                        default -> throw new IllegalStateException("Unexpected value: " + dragonClass);
+                    }
+                }
+            }
+        } else {
+            System.out.println("You need atleast two animals to pair them! Try something else.");
+            game.menuChoice(this);
+        }
     }
 }

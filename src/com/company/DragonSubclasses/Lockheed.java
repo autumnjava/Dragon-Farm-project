@@ -3,8 +3,6 @@ package com.company.DragonSubclasses;
 import com.company.Dragon;
 import com.company.Player;
 
-import java.util.ArrayList;
-
 public class Lockheed extends Dragon {
     public Lockheed(){
         super(null, null, null);

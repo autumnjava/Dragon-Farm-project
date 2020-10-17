@@ -43,7 +43,7 @@ public class Game {
                     }
 
                 }
-                player.removeSickDragonIfFound();
+                player.findAndRemoveSickDragons();
 
             }
             roundsCounter++;
@@ -104,7 +104,6 @@ public class Game {
             }
         }
     }
-    
 
     //just a bunch of help methods
     static public void print(String x){
@@ -130,4 +129,4 @@ public class Game {
         return num < min || num > max ?
                 promptInt(question, min, max) : num;
     }
-    }
+}

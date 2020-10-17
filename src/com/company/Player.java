@@ -191,26 +191,57 @@ public class Player {
             } else {
                 System.out.println("Trying to pair dragons!\nRemember its 50-50 chance to get baby dragons");
                 var random = (int) (Math.random() * (2));
-                if(random==0){
+                if(random == 0){
                     System.out.println("Better luck next time!");
                 } else {
-                    System.out.println("Creating new baby dragons!");
+                    System.out.println("The luck is on your side!\nCreating new dragons!\n");
                     var dragonClass = dragon1.getClass().getSimpleName();
-                    var babyName = Game.prompt("Enter a name of a baby dragon:");
-                    var babyGender = (int) (Math.random() * (2)) == 0 ? "male" : "female";
+                    var litterSize = dragon1.litterSize;
+                    Dragon [] babyDragons = new Dragon[litterSize];
+
                     switch(dragonClass){
-                        case "Lockheed" -> dragonsOwned.add(new Lockheed(babyName, babyGender, this));
-                        case "Falkor" -> dragonsOwned.add(new Falkor(babyName, babyGender, this));
-                        case "Smaug" -> dragonsOwned.add(new Smaug(babyName, babyGender, this));
-                        case "Toothless" -> dragonsOwned.add(new Toothless(babyName, babyGender, this));
-                        case "Viserion" -> dragonsOwned.add(new Viserion(babyName, babyGender, this));
+                        case "Lockheed" -> {
+                            for(int i = 0; i<litterSize; i++){
+                                babyDragons[i] = new Lockheed(askName(i, litterSize), generateGender(), this);
+                            }
+                        }
+                        case "Falkor" -> {
+                            for(int i = 0; i<litterSize; i++){
+                                babyDragons[i] = new Falkor(askName(i, litterSize), generateGender(), this);
+                            }
+                        }
+                        case "Smaug" -> {
+                            for(int i = 0; i<litterSize; i++){
+                                babyDragons[i] = new Smaug(askName(i, litterSize), generateGender(), this);
+                            }
+                        }
+                        case "Toothless" -> {
+                            for(int i = 0; i<litterSize; i++){
+                                babyDragons[i] = new Toothless(askName(i, litterSize), generateGender(), this);
+                            }
+                        }
+                        case "Viserion" -> {
+                            for(int i = 0; i<litterSize; i++){
+                                babyDragons[i] = new Viserion(askName(i, litterSize), generateGender(), this);
+                            }
+                        }
                         default -> throw new IllegalStateException("Unexpected value: " + dragonClass);
                     }
+                    dragonsOwned.addAll(Arrays.asList(babyDragons));
                 }
             }
         } else {
             System.out.println("You need atleast two animals to pair them! Try something else.");
             game.menuChoice(this);
         }
+    }
+
+    public String askName(int i, int litterSize){
+        var name = Game.prompt("Enter a name of a baby dragon nr " + (i+1) + " out of " + litterSize);
+        return name.length() > 2 ? name : askName(i, litterSize);
+    }
+
+    public String generateGender(){
+        return (int) (Math.random() * (2)) == 0 ? "male" : "female";
     }
 }

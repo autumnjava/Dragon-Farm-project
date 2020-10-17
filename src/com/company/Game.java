@@ -26,7 +26,6 @@ public class Game {
         roundsInput = Game.promptInt("How many rounds do you want to play? [5-30]", 5, 30); //ask user how many rounds they want to play
         makeMove();
 
-
         System.out.println("\n".repeat(5) + "We have now played " + roundsInput + " rounds. Which was maximum for this game.");
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
@@ -34,6 +33,7 @@ public class Game {
     }
 
     public void makeMove(){
+        //En spelare förlorar och lämnar spelet när spelaren inte har några pengar och inte har några djur.
         do {
             for (var player : players) {
                 menuChoice(player);
@@ -41,10 +41,8 @@ public class Game {
                     if(!dragon.beenFed){
                         dragon.decreaseHealthOfDragon();
                     }
-
                 }
-                player.findAndRemoveSickDragons();
-
+                //player.findAndRemoveSickDragons();
             }
             roundsCounter++;
         } while (roundsCounter <= roundsInput);

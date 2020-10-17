@@ -13,6 +13,7 @@ public abstract class Dragon {
     protected int maxAge;
     protected ArrayList<String> foodDragonCanEat;
     protected boolean beenFed = false;
+    protected boolean died = false;
 
     public Dragon (String name, String gender, Player owner) {
         this.name = name;

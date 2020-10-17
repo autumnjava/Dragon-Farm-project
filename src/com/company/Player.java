@@ -29,13 +29,11 @@ public class Player {
     }
 
     public void findAndRemoveSickDragons(){
-        if(dragonsOwned.size() > 0){
-            for(int i = dragonsOwned.size()-1; i>= 0; i--){
-                if(dragonsOwned.get(i).healthPercent<=0){
-                    System.out.println("Removing " + dragonsOwned.get(i).name +
-                            " as its health dropped below 0");
-                    dragonsOwned.remove(dragonsOwned.get(i));
-                }
+        for(int i = dragonsOwned.size()-1; i>= 0; i--){
+            if(dragonsOwned.get(i).healthPercent<=0){
+                System.out.println("Removing " + dragonsOwned.get(i).name +
+                        " as its health dropped below 0");
+                dragonsOwned.remove(dragonsOwned.get(i));
             }
         }
     }
@@ -43,7 +41,8 @@ public class Player {
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){
             Game.print("-".repeat(50));
-            System.out.println("NOTE: if health drops below 0, dragon dies.");
+            System.out.println("NOTE: if dragons health drops below 0, dragon dies.");
+            findAndRemoveSickDragons();
             for(var dragon: dragonsOwned){
                 System.out.println(dragon.name.toUpperCase() + " initial price " + dragon.dragonPrice + " its health: " + dragon.healthPercent +
                         " current price: " + dragon.currentPrice() + " kr.");
@@ -138,7 +137,7 @@ public class Player {
 
                 for(int i = foodOwned.size()-1; i >= 0; i--){
                     if(foodOwned.get(i).weight == 0){
-                        System.out.println(foodOwned.get(i).name + " amount became 0. Removing from the list");
+                        System.out.println(foodOwned.get(i).name + " weight became 0. Removing from the list");
                         foodOwned.remove(foodOwned.get(i));
                     }
                 }
@@ -154,4 +153,14 @@ public class Player {
         }
     }
 
+
+    public void mateDragons(){
+/*
+Försöka få ett par djur att para sig, då skapas i 50% av fallen nya djur man äger
+(om djuren är av samma slag och olika kön, olka slags djur kan inte para sig).
+Om parningen lyckas kan spelaren döpa det/de nya djuret/djuren
+(olika slags djur kan ha olika många ungar/parning).
+Könet på djuren som skapas vid parning slumpas (50% hona, 50% hane).*/
+
+    }
 }

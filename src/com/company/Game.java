@@ -77,7 +77,7 @@ public class Game {
                 store.buyFood();
             }
             case "c" -> player.feedDragons();
-            case "d" -> print("You decided to pair dragons");
+            case "d" -> player.mateDragons();
             case "e" -> {
                 FactoryStore store = new FactoryStore(this, player);
                 store.sellDragons();

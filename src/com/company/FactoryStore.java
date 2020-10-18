@@ -13,8 +13,6 @@ public class FactoryStore {
     private Scanner scanner = new Scanner(System.in);
 
     public FactoryStore(Game game, Player player){
-        System.out.println("\n".repeat(20) + "-".repeat(50) +"\nWelcome to the MagicStore, " + player.getName());
-        System.out.println("MagicStore - we never run out of stuff (C).\n" + "-".repeat(50));
         this.game = game;
         this.player = player;
         createDragons();
@@ -118,7 +116,7 @@ public class FactoryStore {
                     "NOTE: enter 0 to next player / next round", 0, dragonsYouCanBuy().size());
             if(inputInt == 0){ return; /* do nothing / skip round */ }
             var chosenDragonName = dragonsYouCanBuy().get(inputInt-1);
-            var name = Game.prompt("Enter a name of a dragon:");
+            var name = askName();
             var gender = askGender();
             Dragon dragonToAdd;
             switch(chosenDragonName){
@@ -168,6 +166,20 @@ public class FactoryStore {
         }
     }
 
+    public void sellAllDragons(){
+        if(player.dragonsOwned.size()>0){
+            for(int i = player.dragonsOwned.size()-1; i>=0; i--){
+                var dragon = player.dragonsOwned.get(i);
+                if(dragon.currentPrice()>0){
+                    player.setMoneyBalance(dragon.currentPrice() + player.getMoneyBalance());
+                } else {
+                    continue;
+                }
+                player.dragonsOwned.remove(dragon);
+            }
+        }
+    }
+
     public void printDragonsYouCanBuy(){
         int counter = 1;
         System.out.println("Dragons you can buy:");
@@ -186,6 +198,11 @@ public class FactoryStore {
                     foodForSale.get(food).price + " kr/kg" + "." +
                     " [MAX: " + (player.getMoneyBalance()/foodForSale.get(food).price) + " kg.]");
         }
+    }
+
+    public String askName(){
+        var name = Game.prompt("Enter a name of a dragon:");
+        return name.length() > 1 ? name : askName();
     }
 
     public String askGender(){

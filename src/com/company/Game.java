@@ -8,7 +8,7 @@ public class Game {
     private static int roundsInput;
     private static int roundsCounter = 1;
 
-    private ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<Player> players = new ArrayList<>();
 
 
     public Game(String... newNames) {
@@ -24,30 +24,42 @@ public class Game {
         }
 
         //creating players
-        for (int i = 0; i < usersInput; i++) {
+        for (int i = usersInput-1; i >= 0 ; i--) {
             System.out.println("Creating player: " + names[i]);
             players.add(new Player(names[i], this));
         }
         roundsInput = Game.promptInt("How many rounds do you want to play? [5-30]", 5, 30); //ask user how many rounds they want to play
         makeMove();
 
-        System.out.println("\n".repeat(5) + "We have now played " + roundsInput + " rounds. Which was maximum for this game.");
+        if(players.size()>0){
+            System.out.println("Printing out the winner(s): ");
+        } else{
+            System.out.println("No winners today! Better luck next time!");
+        }
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
 
     }
 
     public void makeMove(){
-        //En spelare förlorar och lämnar spelet när spelaren inte har några pengar och inte har några djur.
+        roundsCounter = 1;
         do {
-            for (var player : players) {
-                menuChoice(player);
-                for(var dragon: player.dragonsOwned){
-                    if(!dragon.beenFed){
-                        dragon.decreaseHealthOfDragon();
+            for (int i = players.size()-1; i>=0; i--) {
+                var player = players.get(i);
+                if(player.getMoneyBalance() <= 0 && player.dragonsOwned.size()==0){
+                    System.out.println("Player " + player.getName() + " looks like it is over for you. Bye bye.");
+                    players.remove(player);
+                    continue;
+                }
+                if(players.size() > 0){
+                    menuChoice(player);
+                    for(var dragon: player.dragonsOwned){
+                        if(!dragon.beenFed){
+                            dragon.decreaseHealthOfDragon();
+                        }
                     }
                 }
-                //player.findAndRemoveSickDragons();
+
             }
             roundsCounter++;
         } while (roundsCounter <= roundsInput);

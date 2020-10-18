@@ -5,8 +5,8 @@ import com.company.DragonSubclasses.*;
 import java.util.*;
 
 public class Player {
-    private String name;
-    private Game game;
+    private final String name;
+    private final Game game;
     private int moneyBalance = 20000; //start amount of cash
     protected ArrayList<Dragon> dragonsOwned;
     protected ArrayList<Food> foodOwned;
@@ -43,7 +43,7 @@ public class Player {
     public void getAllDragons(){
         if(dragonsOwned.size() > 0){
             Game.print("-".repeat(50));
-            System.out.println("NOTE: if dragons health drops below 0, dragon dies.");
+            System.out.println("NOTE: if dragons health drops below 0, dragon dies.\n");
             findAndRemoveSickDragons();
             for(var dragon: dragonsOwned){
                 System.out.println(dragon.name.toUpperCase() + " initial price " + dragon.dragonPrice + " its health: " + dragon.healthPercent +
@@ -238,7 +238,7 @@ public class Player {
 
     public String askName(int i, int litterSize){
         var name = Game.prompt("Enter a name of a baby dragon nr " + (i+1) + " out of " + litterSize);
-        return name.length() > 2 ? name : askName(i, litterSize);
+        return name.length() > 1 ? name : askName(i, litterSize);
     }
 
     public String generateGender(){

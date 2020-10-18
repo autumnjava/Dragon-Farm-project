@@ -3,7 +3,6 @@ This is an individual project Dragon Farm.
 Created by Aleksandr Smosljajev.
 2020 Malmo, Sweden
 
-#How it works?
 User choses [1-4] players, [5-30] rounds.
 
 Each round player gets 6 choices:

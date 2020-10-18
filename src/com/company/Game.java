@@ -111,7 +111,7 @@ public class Game {
                 FactoryStore store = new FactoryStore(this, player);
                 store.sellAllDragons();
             }
-            players.sort((Player a, Player b) -> { return a.getMoneyBalance() > b.getMoneyBalance() ? -1 : 1; });
+            players.sort((Player a, Player b) -> a.getMoneyBalance() > b.getMoneyBalance() ? -1 : 1);
             int c = 1;
             System.out.println("\n".repeat(20) + "Game ended!\nPrinting out the winner(s): ");
             for(var player: players){

@@ -10,7 +10,6 @@ public class FactoryStore {
     private Game game;
     public LinkedHashMap<String, Dragon> dragonsForSale;
     public LinkedHashMap<String, Food> foodForSale;
-    private Scanner scanner = new Scanner(System.in);
 
     public FactoryStore(Game game, Player player){
         this.game = game;

@@ -30,12 +30,8 @@ public class Game {
         }
         roundsInput = Game.promptInt("How many rounds do you want to play? [5-30]", 5, 30); //ask user how many rounds they want to play
         makeMove();
+        sellDragonsPrintWinners();
 
-        if(players.size()>0){
-            System.out.println("Printing out the winner(s): ");
-        } else{
-            System.out.println("No winners today! Better luck next time!");
-        }
 
         playAgain(); //asks user if he wants to play again and creates a new game if so.
 
@@ -54,15 +50,16 @@ public class Game {
                 if(players.size() > 0){
                     menuChoice(player);
                     for(var dragon: player.dragonsOwned){
-                        if(!dragon.beenFed){
-                            dragon.decreaseHealthOfDragon();
+                        if(!dragon.beenFed && roundsCounter != roundsInput){
+                            dragon.decreaseHealthOfDragon(); //dont do that if dragon been fed in previous round
+                                                             //or it is last round
                         }
                     }
                 }
-
             }
             roundsCounter++;
         } while (roundsCounter <= roundsInput);
+
     }
 
     public void menuChoice(Player player) {
@@ -107,9 +104,27 @@ public class Game {
         }
     }
 
+    public void sellDragonsPrintWinners(){
+        if(players.size()>0){
+            //selling dragons
+            for(var player: players){
+                FactoryStore store = new FactoryStore(this, player);
+                store.sellAllDragons();
+            }
+            players.sort((Player a, Player b) -> { return a.getMoneyBalance() > b.getMoneyBalance() ? -1 : 1; });
+            int c = 1;
+            System.out.println("\n".repeat(20) + "Game ended!\nPrinting out the winner(s): ");
+            for(var player: players){
+                System.out.println(c++ + ". " + player.getName() + " balance: " + player.getMoneyBalance());
+            }
+        } else{
+            System.out.println("\n".repeat(20) +"No winners today! Better luck next time!");
+        }
+    }
+
 
     public void playAgain(){
-        var input = (prompt("Play again? (y/n)?"));
+        var input = (prompt("\n".repeat(5) + "Play again? (y/n)?"));
         switch(input){
             case "y" -> new Game();
             case "n" -> System.exit(0);

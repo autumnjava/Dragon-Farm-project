@@ -49,6 +49,7 @@ public class Game {
                 }
                 if(players.size() > 0){
                     for(var dragon: player.dragonsOwned){
+                        dragon.becomeOlder();
                         dragon.getSick();
                         if(dragon.isSick){
                             System.out.println("\n".repeat(20) + "You need go to veterinar. Your dragon " + dragon.name + " is sick." +

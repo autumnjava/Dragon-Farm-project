@@ -236,6 +236,28 @@ public class Player {
         }
     }
 
+    public void takeDragonToVet(){
+        boolean managedToSave = false;
+
+        for(var dragon: dragonsOwned){
+            if(dragon.isSick){
+                var random = (int) (Math.random()*2);
+                if (random == 0) {
+                    dragon.isSick = false;
+                    managedToSave = true;
+                    this.setMoneyBalance(this.getMoneyBalance() - dragon.vetCost);
+                }
+                else {
+                    dragon.healthPercent = 0;
+                    managedToSave = false;
+                    this.setMoneyBalance(this.getMoneyBalance() - dragon.vetCost);
+                }
+            }
+        }
+        System.out.println(managedToSave ? "Vet managed to save the dragon!" : "Vet could not save the dragon!");
+
+    }
+
     public String askName(int i, int litterSize){
         var name = Game.prompt("Enter a name of a baby dragon nr " + (i+1) + " out of " + litterSize);
         return name.length() > 1 ? name : askName(i, litterSize);

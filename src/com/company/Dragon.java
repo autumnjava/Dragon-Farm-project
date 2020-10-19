@@ -46,6 +46,15 @@ public abstract class Dragon {
         }
     }
 
+    public void becomeOlder(){
+        if(owner.dragonsOwned.size() > 0){
+            this.age++;
+            if(this.age == this.maxAge){
+                System.out.println("Dragon " + this.name + " reaches max age, which was " + this.maxAge + ". Dragon dies");
+                this.setHealthPercent(0);
+            }
+        }
+    }
 
 
     public void setHealthPercent(int healthPercent) {
@@ -54,7 +63,7 @@ public abstract class Dragon {
 
 
     public int currentPrice(){
-        return dragonPrice * healthPercent / 100;
+        return dragonPrice * healthPercent / 100 - this.age*10;
     }
 
 }

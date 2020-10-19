@@ -46,8 +46,9 @@ public class Player {
             System.out.println("NOTE: if dragons health drops below 0, dragon dies.\n");
             findAndRemoveSickDragons();
             for(var dragon: dragonsOwned){
-                System.out.println(dragon.name.toUpperCase() + " initial price " + dragon.dragonPrice + " its health: " + dragon.healthPercent +
-                        " current price: " + dragon.currentPrice() + " kr.");
+                System.out.println(dragon.name.toUpperCase() + "(" + dragon.gender + ") initial price: " + dragon.dragonPrice +
+                        ", its health: " + dragon.healthPercent + "%, its age: " + dragon.age +
+                        "/" + dragon.maxAge + ", current price: " + dragon.currentPrice() + " kr.");
             }
             Game.print("-".repeat(50));
         } else {

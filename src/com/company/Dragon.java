@@ -12,9 +12,11 @@ public abstract class Dragon {
     protected int age;
     protected int maxAge;
     protected int litterSize;
+    protected int vetCost;
     protected ArrayList<String> foodDragonCanEat;
     protected boolean beenFed = false;
-    protected boolean died = false;
+    protected boolean isSick = false;
+
 
     public Dragon (String name, String gender, Player owner) {
         this.name = name;
@@ -35,6 +37,16 @@ public abstract class Dragon {
             healthPercent -= randomNr;
         }
     }
+
+    public void getSick(){
+        if(owner.dragonsOwned.size() > 0){
+            var random = (int) (Math.random()*5);
+            if (random == 0) isSick = true;
+            else isSick = false;
+        }
+    }
+
+
 
     public void setHealthPercent(int healthPercent) {
         this.healthPercent = healthPercent;

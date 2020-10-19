@@ -11,6 +11,8 @@ public class Smaug extends Dragon {
         age = 0;
         maxAge = 5;
         litterSize = 2;
+        isSick = false;
+        vetCost = 350;
         foodDragonCanEat = addFood("fish", "meat");
     }
     public Smaug(String name, String gender, Player owner){
@@ -20,6 +22,8 @@ public class Smaug extends Dragon {
         age = 0;
         maxAge = 5;
         litterSize = 2;
+        isSick = false;
+        vetCost = 350;
         foodDragonCanEat = addFood("fish", "meat");
     }
 }

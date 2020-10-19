@@ -11,6 +11,8 @@ public class Toothless extends Dragon {
         age = 0;
         maxAge = 5;
         litterSize = 3;
+        isSick = false;
+        vetCost = 430;
         foodDragonCanEat = addFood("grass");
     }
     public Toothless(String name, String gender, Player owner){
@@ -20,6 +22,8 @@ public class Toothless extends Dragon {
         age = 0;
         maxAge = 5;
         litterSize = 3;
+        isSick = false;
+        vetCost = 430;
         foodDragonCanEat = addFood("grass");
     }
 

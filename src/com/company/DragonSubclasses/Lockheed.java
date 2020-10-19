@@ -9,7 +9,7 @@ public class Lockheed extends Dragon {
         dragonPrice = 4000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 10;
         litterSize = 3;
         isSick = false;
         vetCost = 300;
@@ -20,7 +20,7 @@ public class Lockheed extends Dragon {
         dragonPrice = 4000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 10;
         litterSize = 3;
         isSick = false;
         vetCost = 300;

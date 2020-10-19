@@ -9,8 +9,8 @@ public class Viserion extends Dragon {
         dragonPrice = 8000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
-        litterSize = 2;
+        maxAge = 15;
+        litterSize = 4;
         isSick = false;
         vetCost = 400;
         foodDragonCanEat = addFood("fish", "meat", "grass");
@@ -20,8 +20,8 @@ public class Viserion extends Dragon {
         dragonPrice = 8000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
-        litterSize = 2;
+        maxAge = 15;
+        litterSize = 4;
         isSick = false;
         vetCost = 400;
         foodDragonCanEat = addFood("fish", "meat", "grass");

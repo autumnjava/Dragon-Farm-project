@@ -9,7 +9,7 @@ public class Smaug extends Dragon {
         dragonPrice = 6000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 6;
         litterSize = 2;
         isSick = false;
         vetCost = 350;
@@ -20,7 +20,7 @@ public class Smaug extends Dragon {
         dragonPrice = 6000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 6;
         litterSize = 2;
         isSick = false;
         vetCost = 350;

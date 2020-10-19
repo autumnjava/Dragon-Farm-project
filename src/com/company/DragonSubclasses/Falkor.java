@@ -10,7 +10,7 @@ public class Falkor extends Dragon {
         dragonPrice = 5000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 11;
         litterSize = 3;
         isSick = false;
         vetCost = 400;
@@ -21,7 +21,7 @@ public class Falkor extends Dragon {
         dragonPrice = 5000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 11;
         litterSize = 3;
         isSick = false;
         vetCost = 400;

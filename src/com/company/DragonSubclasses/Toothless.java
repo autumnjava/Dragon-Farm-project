@@ -9,7 +9,7 @@ public class Toothless extends Dragon {
         dragonPrice = 7000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 9;
         litterSize = 3;
         isSick = false;
         vetCost = 430;
@@ -20,7 +20,7 @@ public class Toothless extends Dragon {
         dragonPrice = 7000;
         healthPercent = 100;
         age = 0;
-        maxAge = 5;
+        maxAge = 9;
         litterSize = 3;
         isSick = false;
         vetCost = 430;

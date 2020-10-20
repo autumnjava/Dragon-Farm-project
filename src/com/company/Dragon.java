@@ -52,6 +52,7 @@ public abstract class Dragon {
             if(this.age == this.maxAge){
                 System.out.println("Dragon " + this.name + " reaches max age, which was " + this.maxAge + ". Dragon dies");
                 this.setHealthPercent(0);
+                Game.sleep(1);
             }
         }
     }

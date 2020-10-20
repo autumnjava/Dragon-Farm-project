@@ -80,10 +80,11 @@ public class FactoryStore {
                 }
                 if (foodToAdd.finalPrice > player.getMoneyBalance()) {
                     System.out.println("Trying to get a loan? Not today. Try again");
+                    Game.sleep(1);
                     buyFood();
                 } else {
                     var add = true;
-                    for(int i = player.foodOwned.size()-1; i>=0; i--){
+                    for(int i = player.foodOwned.size()-1; i>=0; i--){ // dont need to go backwards
                         if(player.foodOwned.get(i).name.equals(foodToAdd.name)){
                             player.foodOwned.get(i).setWeight(player.foodOwned.get(i).weight + foodToAdd.weight);
                             add = false;
@@ -102,6 +103,7 @@ public class FactoryStore {
             }
         } else {
             System.out.println("You cant buy anything, sorry!");
+            Game.sleep(1);
             game.menuChoice(player);
         }
     }
@@ -134,6 +136,7 @@ public class FactoryStore {
             }
         } else {
             System.out.println("You cant buy anything, sorry!");
+            Game.sleep(1);
         }
     }
 
@@ -161,6 +164,7 @@ public class FactoryStore {
             }
         } else {
             System.out.println("Unfortunately you have nothing to sell.\nTry something else maybe?");
+            Game.sleep(1);
             game.menuChoice(player);
         }
     }

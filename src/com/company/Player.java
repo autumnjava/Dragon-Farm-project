@@ -93,7 +93,7 @@ public class Player {
 
             var canEat = false;
             for(var eatable: chosenDragon.foodDragonCanEat){
-                for(var ownable: foodOwned){
+                for(var ownable: foodOwned){ //instead for loop through, can use contains.
                     if (ownable.name.equals(eatable)) {
                         canEat = true;
                         break;
@@ -134,7 +134,7 @@ public class Player {
                 }
                 else{
                     chosenDragon.setHealthPercent(chosenDragon.healthPercent + 10*weight);
-                    foodMap.get(input).setWeight(chosen.weight-weight);
+                    chosen.setWeight(chosen.weight-weight);
                     chosenDragon.beenFed = true;
                 }
 
@@ -194,6 +194,7 @@ public class Player {
                 var random = (int) (Math.random() * (2));
                 if(random == 0){
                     System.out.println("Better luck next time!");
+                    Game.sleep(1);
                 } else {
                     System.out.println("The luck is on your side!\nCreating new dragons!\n");
                     var dragonClass = dragon1.getClass().getSimpleName();
@@ -232,7 +233,7 @@ public class Player {
                 }
             }
         } else {
-            System.out.println("You need atleast two animals to pair them! Try something else.");
+            System.out.println("You need atleast two dragons to pair them! Try something else.");
             game.menuChoice(this);
         }
     }
@@ -243,20 +244,18 @@ public class Player {
         for(var dragon: dragonsOwned){
             if(dragon.isSick){
                 var random = (int) (Math.random()*2);
-                if (random == 0) {
+                if (random == 0) { // if(Math.random() >= .5)
                     dragon.isSick = false;
                     managedToSave = true;
-                    this.setMoneyBalance(this.getMoneyBalance() - dragon.vetCost);
                 }
                 else {
                     dragon.healthPercent = 0;
                     managedToSave = false;
-                    this.setMoneyBalance(this.getMoneyBalance() - dragon.vetCost);
                 }
+                this.setMoneyBalance(this.getMoneyBalance() - dragon.vetCost);
             }
         }
         System.out.println(managedToSave ? "Vet managed to save the dragon!" : "Vet could not save the dragon!");
-
     }
 
     public String askName(int i, int litterSize){

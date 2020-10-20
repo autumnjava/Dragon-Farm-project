@@ -45,6 +45,7 @@ public class Game {
                 if(player.getMoneyBalance() < 4000 && player.dragonsOwned.size()==0){
                     System.out.println("Player " + player.getName() + " looks like it is over for you. Bye bye.");
                     players.remove(player);
+                    sleep(1);
                     continue;
                 }
                 if(players.size() > 0){
@@ -52,18 +53,23 @@ public class Game {
                         dragon.becomeOlder();
                         dragon.getSick();
                         if(dragon.isSick){
-                            System.out.println("\n".repeat(20) + "You need go to veterinar. Your dragon " + dragon.name + " is sick." +
+                            System.out.println("\n".repeat(20) +  player.getName() + ", you need go to veterinar. Your dragon " + dragon.name + " is sick." +
                                     "\nThis costs " + dragon.vetCost + " kr." + " Current round: " + roundsCounter +
                                     "\n Your balance is: " + player.getMoneyBalance());
                             var answer = prompt("Would you like to do that? [y/n] ?");
                             if (answer.equals("y") && player.getMoneyBalance()>=dragon.vetCost){
                                 System.out.println("You decided to go to the vet!");
                                 player.takeDragonToVet();
-                            } else if (answer.equals("n") && player.getMoneyBalance()>=dragon.vetCost)
+                                sleep(1);
+                            } else if (answer.equals("n") && player.getMoneyBalance()>=dragon.vetCost){
                                 System.out.println("You decided not to go to vet! Dragon dies.");
+                                dragon.setHealthPercent(0);
+                                sleep(1);
+                            }
                             else {
                                 System.out.println("You dont have enough money. Dragon dies.");
                                 dragon.setHealthPercent(0);
+                                sleep(1);
                             }
                         } else if(!dragon.beenFed && roundsCounter != roundsInput){
                             dragon.decreaseHealthOfDragon(); //dont do that if dragon been fed in previous round
@@ -173,5 +179,11 @@ public class Game {
         // otherwise return the choice
         return num < min || num > max ?
                 promptInt(question, min, max) : num;
+    }
+    public static void sleep(int s){
+        try {
+            Thread.sleep(s*1000);
+        }
+        catch(Exception ignore){}
     }
 }

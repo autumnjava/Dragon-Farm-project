@@ -1,6 +1,6 @@
 # What is this?
 This is an individual project Dragon Farm.
-Created by Aleksandr Smosljajev.
+Created by Alexander Smosljajev.
 2020 Malmo, Sweden
 
 User choses [1-4] players, [5-30] rounds.
